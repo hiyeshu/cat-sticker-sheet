@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # [INPUT]: 依赖 references/sheet.schema.json 的字段契约、references/anchor-exclusions.json 的锚点排除种子与可选调用项目 ledger
-# [OUTPUT]: 对外提供出图前的结构硬闸门（机制双射、荒诞落点、尺度/领域/材质/表情配额、装饰余波、跨成图去重）与项目 ledger 追加
-# [POS]: scripts 的计划校验器，把 shell-variation.md 中可判定的猫头变化与材质错位规则变成机器拒收条件，被 SKILL.md 第 4 步调用
+# [OUTPUT]: 对外提供出图前的结构硬闸门（外壳机制双射、荒诞落点、2/4/3 尺度、领域/材质/表情配额、微贴纸余波、跨成图去重）与项目 ledger 追加
+# [POS]: scripts 的计划校验器，把 shell-variation.md 中可判定的 face-in-cover 外壳变化与材质错位规则变成机器拒收条件，被 SKILL.md 第 4 步调用
 # [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 """用法:
     python3 scripts/validate_plan.py plan.json [--ledger PATH] [--append]

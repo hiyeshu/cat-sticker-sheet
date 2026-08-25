@@ -1,51 +1,53 @@
 <!--
-[INPUT]: 依赖用户猫咪主体图与用户确认的黄色猫咪拼贴锚点中可复用的视觉机制，不依赖锚点中的具体猫、道具、文字、品牌或排版
-[OUTPUT]: 对外提供 Photographic Surreal Cat-head Sticker Sheet 的身份保真、视觉性格、特殊材质、猫头穿戴、色彩、背景、单层白边与反向约束
-[POS]: references 的视觉身份真源，被主流程、Prompt 编译器与质量门共同消费，统一“真实猫 + 可信材质 + 不合理组合”的视觉语法
+[INPUT]: 依赖用户猫咪主体图与黄色拼贴锚点可复用的媒介线索，不依赖其中具体猫、道具、文字、标识或排版
+[OUTPUT]: 对外提供固定的 Retro-pop Face-in-cover Cat Sticker Sheet 形态、低保真摄影拼贴、猫咪身份/性格、特殊材质、排版与单层白边约束
+[POS]: references 的视觉身份真源，确保新增性格和材质变量始终嵌在原始 cover-collage 骨架内，不漂移成另一套猫头插画风格
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
 
-# Photographic Surreal Cat-head Sticker Sheet
+# Retro-pop Face-in-cover Cat Sticker Sheet
 
-中文名：写实荒诞猫头穿戴拼贴贴纸版
+中文名：复古流行写实猫脸外壳拼贴贴纸版
 
-## Fixed System
+## Fixed Form
 
-- **Artifact:** one finished flat sticker-sheet image, never a photographed mockup or separate files.
-- **Canvas:** default 3:5 portrait, full-frame background, loose mixed-scale collage.
-- **Inventory:** exactly 9 main cat-head stickers plus 6 accent stickers by default.
-- **Cat count:** each main piece contains one depiction of the source cat's head; accents contain no cat face or body. The full page therefore contains exactly nine cat heads.
-- **Head-first crop:** use face, face-and-ears, face-and-front-paws, or a minimal head-and-shoulders crop. Do not drift into nine full-body scenes.
-- **Cat identity:** keep the cat photographic and recognition-oriented. Preserve user-provided breed when known and all visible breed/type cues, real fur, natural eye surfaces, true coat relationships, ear shape, nose, muzzle, and defining marks. If breed is not supplied, never invent pedigree from appearance.
-- **Visual persona:** derive one image-based character impression from eyelids, gaze, mouth, ears and head posture. Treat it as visual direction, not the animal's true personality. Vary expressions inside this grammar; never turn every cat into the same generic cute mascot.
-- **Wearable mechanism:** make an oversized familiar object perch on, wrap, frame, reshape, reveal, contain or be worked by the head, ears or front paws. Fit the opening and load path deliberately around the skull and ears. A loose prop pasted beside the face does not count.
-- **Absurdity:** combine a familiar object with an unexpected but physically legible material and a persona-consistent deadpan expression. Every piece states what normal position, role or material expectation it displaces. Random prop accumulation is not a joke.
-- **Integration variety:** use the nine mechanisms in `shell-variation.md`; `nests` and `face_window` carry one slot each. `scripts/validate_plan.py` enforces mechanism, expression, material-class, domain and absurdity coverage.
-- **Material credibility:** render tactile real-world thickness and behavior. Fabric compresses and folds; translucent matter has depth and refraction; reflective matter carries environmental highlights; brittle shells show openings and support; crinkled packaging keeps creases. A flat recolor is not a material change.
-- **Collage medium:** use high-quality photographic cut-paper collage, slightly imperfect hand-cut outer contours, and restrained internal photographic depth. Keep the real cat face sharper than the surrounding construction.
-- **Tone:** cute, anthropomorphic and mildly absurd, with dry or deadpan restraint. Let the cat's own visual persona survive; the object-material mismatch carries most of the comedy.
-- **Color:** use saturated retro color blocking with cream neutrals and two to four lively hues. Avoid muddy gray palettes.
-- **Background:** use one clean solid field. Default to saturated warm yellow near `#FFC21A`; honor a user-requested alternative color. No scenery, paper grain, pattern, gradient, vignette, center glow, or multiple color zones.
-- **Border:** give every piece exactly one continuous white die-cut contour in one visually consistent absolute width across the page, about 2% of canvas width. White is the only outline color. No second rim, colored stroke, halo, glow, layered contour, or thick drop shadow.
-- **Separation:** keep every piece fully inside the canvas with visible background gutter. Borders never touch, overlap, or merge.
-- **Text:** permit zero to two short uppercase deadpan labels as accent stickers. Quote them verbatim and prohibit all other words, letters, brands, watermarks, and signatures.
+- **Artifact:** one finished flat 3:5 portrait die-cut sticker-sheet image for a visual style experiment, never a photographed mockup or separate files.
+- **Inventory:** exactly 9 main face-in-cover cat stickers plus exactly 6 independent micro-stickers.
+- **Scale rhythm:** exactly 2 large hero covers, 4 medium covers, and 3 small covers in a loose poster-collage composition; place the six micro-stickers in the gaps.
+- **Cat count:** show the same source cat exactly once inside each main cover and nowhere in the micro-stickers, for exactly nine cat faces on the page.
+- **Face-in-cover grammar:** center the photographic cat face in one clean opening of every absurd oversized wearable shell. The shell hides or replaces the body; the face, ears, limited front paws, or a minimal fur edge may remain visible. Do not turn the set into nine unrelated scenes or free-floating props.
+- **Identity:** preserve user-provided breed when known and all visible breed/type cues, real fur, natural eye surfaces, coat relationships, ear shape, nose, muzzle, and defining marks. Never invent pedigree from appearance.
+- **Visual persona:** derive one image-based character impression from eyelids, gaze, mouth, ears, and head posture. Vary expressions inside that family—deadpan, sleepy, skeptical, mildly unimpressed, curious, or a restrained smile as appropriate—without turning the cat into a generic mascot.
+- **Originality:** invent all cover shells for this cat and this sheet. Do not reproduce an existing character, campaign, costume, poster, logo, wording, or composition. Never put specific third-party names into the renderer prompt.
 
-## Variable System
+## Fixed Style
+
+- **Visual medium:** deliberate low-fi photomontage with a photographic cat face and tactile real-world shell materials.
+- **Edges:** clean but slightly handmade cut-paper contours; the face remains clearer and more photographic than the surrounding covers.
+- **Era and energy:** high-saturation late-1990s/early-2000s pop-poster energy, simple flat printed highlights, and playful tension between a believable face and a ridiculous object-costume.
+- **Surface treatment:** allow very light halftone and photocopy grain on cover shells and typography only. Keep the cat face and flat background clean.
+- **Material credibility:** fabric compresses and folds; translucent matter has depth and refraction; reflective matter carries highlights; brittle shells show openings and support; packaging keeps creases. A flat recolor is not a material change.
+- **Tone:** cute, anthropomorphic, mildly absurd, and coolly deadpan rather than energetic cartoon comedy.
+- **Background:** use one perfectly flat saturated color field. Default to cerulean blue near `#279DDA`; honor an explicit user color. No scenery, paper grain, pattern, gradient, vignette, glow, lighting falloff, or multiple zones.
+- **Border:** give all fifteen pieces exactly one continuous pure-white die-cut contour in one identical absolute width, about 2% of canvas width. No second border, colored rim, halo, glow, bevel, cast shadow, drop shadow, or photographed paper depth.
+- **Separation:** keep every piece fully inside the canvas with generous visible background gutters. Nothing overlaps, touches, merges, or clips.
+- **Text:** permit zero to two short uppercase retro labels as micro-stickers. Quote them verbatim and prohibit every other word, letter, number, logo, watermark, signature, account name, label, or gibberish.
+
+## Variable Contents
 
 - Breed/type evidence, recognition anchors, visual persona, expression language, and forbidden expressions vary per cat.
-- Inspiration domain spans food, drink, bath, sport, fashion, packaging, desk, home, travel, nature, industrial, and toy contexts; user examples are seeds, never mandatory inventory.
-- Material class spans food-derived, textile, paper, packaging, transparent, reflective, rigid, organic, and mixed constructions; every chosen material also needs a visible behavior.
-- Cat crop stays head-led: face, face-and-ears, face-and-paws, or minimal head-and-shoulders.
-- Layout rhythm may use a loose three-column stack, two-hero top anchor, or diagonal mixed-scale constellation.
-- Concept seed combines one cat cue, one persona cue, two material cues, and one absurdity rule; never render the internal theme title as text unless approved.
-- Text accents: zero, one, or two; derive them from the user's mood and never copy the bundled anchor's phrases.
+- Cover sources may come from food, drink, bath, sport, fashion, packaging, desk, home, travel, nature, industrial, or toy contexts; user examples are inspiration, never a required inventory.
+- Material classes include food-derived, textile, paper, packaging, transparent, reflective, rigid, organic, and mixed constructions; every material also needs visible physical behavior.
+- Mechanism metadata may vary to prevent repetition, but the visible result always resolves back to one centered face inside one oversized cover shell.
+- Concept seed combines one cat cue, one persona cue, two material cues, and one absurdity rule. Never render the internal seed title.
+- Micro-stickers reuse cover-related objects, charms, residues, fragments, or up to two approved labels; they contain no cat.
 
 ## Yellow Anchor Role
 
-Use `../assets/yellow-cat-collage-anchor.png` as a style reference only. Borrow its photographic collage medium, tactile contrast, saturated color energy, sparse accents, white-border logic, loose page rhythm, and physically legible absurdity. The written system overrides every visible detail in the anchor.
+Use `../assets/yellow-cat-collage-anchor.png` only as a secondary style reference. Borrow its photographic face cutouts, tactile contrast, saturated color energy, sparse micro-stickers, white-border logic, loose rhythm, and physically legible absurdity. The written cover-collage contract overrides every visible detail.
 
-Never borrow its cat traits, exact objects, material-object pairings, phrases, logos, palette placement, sticker positions, lighting falloff, or composition. The target cat source is always the sole authority for cat appearance and visual persona.
+Never borrow its cat traits, exact objects, material-object pairings, phrases, logos, palette placement, sticker positions, lighting falloff, or composition. Image 1 remains the sole authority for cat identity and visual persona.
 
 ## Anti-style
 
-Avoid generic cute-cat averaging, invented breeds, nine identical expressions, unrelated personality shifts, full-body scene drift, hand-drawn line art, watercolor, crayon, plush-doll redesign, fuzzy mascot anatomy, clay, glossy 3D toys, vector-perfect icons, anime eyes, fashion illustration, portrait painting, physically flat “special” materials, impossible ear occlusion, airbrush gradients, dramatic studio lighting, deep cast shadows, double outlines, colored outer rims, sticker mockups, packaging, hands holding the sheet, hard equal-cell grids, full-bleed scenes, overlapping pieces, cropped borders, random slogans, copied anchor props, copied previous-sheet objects, repeated face-in-a-hole templates, generic accent reuse, copied brand elements, extra cats, duplicated faces, or unrelated companions.
+Avoid generic cute-cat averaging, invented breeds, nine identical expressions, unrelated personality shifts, full-body scene drift, loose props beside the face, painterly art, cinematic lighting, glossy 3D or toy plastic, smooth vector illustration, anime, chibi, plush-doll redesign, fuzzy mascot anatomy, watercolor, physically flat “special” materials, impossible ear occlusion, deep cast shadows, double outlines, colored rims, sticker mockups, packaging, hands holding the sheet, hard equal-cell grids, full-bleed scenery, overlapping pieces, cropped borders, random slogans, copied reference inventory, duplicated faces, extra cats, or unrelated companions.

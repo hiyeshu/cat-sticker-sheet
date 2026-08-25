@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "cat-sticker-sheet / sheet plan",
-  "_protocol": "[INPUT]: 依赖 subject-genome.md 的猫咪身份与视觉性格、shell-variation.md 的猫头造型槽位分配，以及 style-system.md 的 9+6 契约; [OUTPUT]: 对外提供一页贴纸的唯一真源 JSON，被 compile_prompt.py、validate_plan.py 与项目运行 ledger 共同消费; [POS]: references 的内容契约层，把每猫性格、每片表情与材质错位从固定渲染语法中分离出来; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
+  "_protocol": "[INPUT]: 依赖 subject-genome.md 的猫咪身份与视觉性格、shell-variation.md 的外壳关系槽位分配，以及 style-system.md 的固定 face-in-cover 9+6 契约; [OUTPUT]: 对外提供一页贴纸的唯一真源 JSON，被 compile_prompt.py、validate_plan.py 与项目运行 ledger 共同消费; [POS]: references 的内容契约层，把每猫性格、每片外壳表情与材质错位从固定渲染语法中分离出来; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
   "description": "只描述这一页【是什么】。不变的产物契约在 compile_prompt.py；排除项在 anchor-exclusions.json 与项目 ledger；IP 边界只留在 SKILL.md，三者都不进本文件。",
   "type": "object",
   "required": ["sheet_id", "seed", "subject", "page", "pieces", "accents"],
@@ -83,7 +83,7 @@
           "persona_fit": { "type": "string", "minLength": 1,
                            "description": "说明这张表情与情境为什么属于这只猫，而非任意猫" },
           "wearable_fit": { "type": "string", "minLength": 1,
-                            "description": "说明物件如何顺着猫头、耳朵或前爪真实穿戴与受力" },
+                            "description": "说明外壳开口与边缘如何顺着猫头、耳朵或前爪真实穿戴与受力" },
           "absurdity": { "enum": ["low", "medium", "high"] }
         }
       }
