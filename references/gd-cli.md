@@ -1,19 +1,19 @@
 <!--
 [INPUT]: Depends on confirmed absence of a native image-generation tool, the parent's exact final prompt, user-provided or task-required images, Node.js 20+ with npm or pnpm, and the live authentication, organization, image.generate Tool, and vivi-image-2-0 contracts returned by gd-cli
-[OUTPUT]: Provides first-run installation and verification, authentication and organization setup, a fixed vivi-image-2-0 request profile, pre-charge confirmation, request JSON, minimal image inputs, output persistence, error handling, and one correction pass for the GD CLI fallback
+[OUTPUT]: Provides first-run installation and verification, authentication and organization setup, a fixed vivi-image-2-0 request profile, pre-charge confirmation, request JSON, minimal image inputs, output persistence, error handling, and no automatic paid retry
 [POS]: Fallback renderer adapter in references, loaded by SKILL.md only when the runtime has no native image-generation tool; it does not define the sticker sheet's visual design
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
 
 # GD CLI Fallback Renderer
 
-[Routing](#routing-gate) · [Setup](#first-run-setup) · [Contract](#verify-the-live-contract) · [Input](#build-the-input) · [Call](#call-and-persist) · [Retry](#correct-and-retry) · [Errors](#error-contract) · [Evidence](#return-evidence)
+[Routing](#routing-gate) · [Setup](#first-run-setup) · [Contract](#verify-the-live-contract) · [Input](#build-the-input) · [Call](#call-and-persist) · [Retry](#no-automatic-correction) · [Errors](#error-contract) · [Evidence](#return-evidence)
 
 ## Routing Gate
 
 - This is not a peer alternative to native image generation. If the runtime exposes any callable native image-generation tool, return to the parent workflow without inspecting, installing, or calling GD CLI.
-- Enter this flow only when the runtime exposes no native image-generation tool. Native failure, rate limiting, latency, poor output, or a failed correction does not count as tool absence.
-- The parent Skill still owns source inspection, final-prompt writing, and visual review. Call the atomic `image.generate` Tool; do not start a GD CLI Agent workflow.
+- Enter this flow only when the runtime exposes no native image-generation tool. Native failure, rate limiting, latency, poor output, or a user-requested correction does not count as tool absence.
+- The parent Skill still owns source inspection, final-prompt writing, and the minimal delivery check. Call the atomic `image.generate` Tool; do not start a GD CLI Agent workflow.
 - Keep the final prompt backend-neutral. Renderer-specific fields belong only in the request JSON.
 
 ## First-run Setup
@@ -107,10 +107,10 @@ gd-cli tool call image.generate --input request.json
 - A successful result contains `content` and `usage`. Download the first image resource to `output/cat-sticker-sheets/`; verify its MIME type and raster content before choosing an extension, and never expose a complete signed URL.
 - Task creation alone is not success; obtain an image that can be opened. The catalog price range in `usage` does not prove the amount actually charged.
 
-## Correct and Retry
+## No Automatic Correction
 
-- Allow the parent's single targeted correction only after a request reaches a known successful terminal state but fails the visual gate. Continue with GD CLI; do not switch renderers.
-- During correction, keep only user-provided images plus a failed draft when that draft is required for the edit. Keep the source cat first and label the failed draft as the result to correct, not as a style reference. Never add the bundled anchor.
+- Do not submit another paid request because of count, layout, style, color, text, border, or other visual-review preferences.
+- Submit a correction or fresh generation only when the user explicitly asks. Keep the source cat first; when a prior draft is required, label it as the result to edit rather than a style reference. Never add the bundled anchor.
 - If a paid request may have been submitted but its terminal state is unknown, stop and report the uncertainty. Do not resubmit it.
 
 ## Error Contract
@@ -123,4 +123,4 @@ gd-cli tool call image.generate --input request.json
 
 ## Return Evidence
 
-Record why fallback was entered, the fixed model, requested size, terminal state, current catalog price range, known boundary of the actual charge, and local output path. Then apply the parent Skill's visual quality gate.
+Record why fallback was entered, the fixed model, requested size, terminal state, current catalog price range, known boundary of the actual charge, and local output path. Then apply only the parent Skill's minimal delivery check.

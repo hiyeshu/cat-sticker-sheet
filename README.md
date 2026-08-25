@@ -42,5 +42,5 @@ npx skills add https://github.com/hiyeshu/cat-sticker-sheet -g -a codex --skill 
 SKILL.md     Skill 入口与执行流程
 agents/      Codex UI 元数据
 assets/      维护者视觉校准资料，不参与生成
-references/  身份、单步错位、渲染与质量规则
+references/  身份、单步错位、渲染与轻量交付检查
 ```

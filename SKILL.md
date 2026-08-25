@@ -39,7 +39,7 @@ Turn one real cat into a retro-pop photographic sticker family. The cat stays re
 
 ## Route The Request
 
-- **Generate:** inspect the cat, write the final prompt internally, generate, inspect, correct once if needed, persist the selected sheet, and return only the image preview plus its absolute file path.
+- **Generate:** inspect the cat, write the final prompt internally, generate once, run the minimal delivery check, persist the result, and return only the image preview plus its absolute file path. Never trigger another paid generation from visual review alone.
 - **Missing source:** ask for the cat image when the request points to “this cat” but no usable image exists.
 - **Multiple cats:** ask which cat should lead when the source does not have one unambiguous subject. Never mix several cats on one sheet.
 - **Batch:** make one independent sheet per supplied single-cat image.
@@ -54,7 +54,7 @@ Assign every input one role:
 - Read `references/style-system.md` for every request.
 - Read `references/subject-identity.md` when an image is supplied.
 - Read `references/one-step-concepts.md` before writing the nine concepts.
-- Read `references/quality-gate.md` before returning a generated result.
+- Read `references/quality-gate.md` before returning a generated result; it is a minimal broken-output check, not an aesthetic scorecard.
 - Read `references/gd-cli.md` only after confirming that the runtime exposes no callable native image-generation tool. Do not load or use it while a native tool is available.
 
 Resolve bundled paths relative to this `SKILL.md`.
@@ -65,8 +65,8 @@ Resolve bundled paths relative to this `SKILL.md`.
 2. **Write the final prompt.** State the identity anchors, background direction, palette, 3:5 format, 2/4/3 scale rhythm, nine distinct object-interaction-displacement-expression concepts, optional human actions where useful, 2–3 graphic face-in-cover accents, six cat-free micro-stickers, single white contour, and text boundary. Keep it backend-neutral and placeholder-free; do not create a separate plan artifact.
 3. **Choose the renderer.** Apply the native-first rule above; use `references/gd-cli.md` only for fallback.
 4. **Generate from the real source.** Pass only user-provided or task-required images, with the subject first. On the native route, use `referenced_image_paths` for local inputs or the smallest sufficient `num_last_images_to_include` for conversation-only inputs; never use both mechanisms. On the GD CLI fallback route, follow `references/gd-cli.md`. Never pass the bundled anchor to any renderer.
-5. **Inspect.** Apply `references/quality-gate.md` to the actual image. Regenerate once with one targeted correction if it fails, using the already-selected renderer only.
-6. **Persist and return compactly.** Save every selected generated image under the active project's `output/cat-sticker-sheets/`, never inside the installed Skill. Return only the image preview and a clickable absolute path to that file. Do not include the internal final prompt, mode, identity summary, visual-review status, or routine quality explanation. Add one brief limitation only when no compliant result can be produced; never substitute the internal prompt for a missing image.
+5. **Check delivery, not taste.** Apply only the three catastrophic checks in `references/quality-gate.md`. Do not enumerate stickers, score prompt adherence, grade style details, compare candidate aesthetics, or regenerate automatically. Renderer variation is acceptable.
+6. **Persist and return compactly.** Save the generated image under the active project's `output/cat-sticker-sheets/`, never inside the installed Skill. Return only the image preview and a clickable absolute path to that file. Do not include the internal final prompt, mode, identity summary, review status, or routine quality explanation. Add one brief limitation only when the file is broken, the hero subject is wrong, or the result is severely incomplete; never substitute the internal prompt for a missing image.
 
 ## Return Shape
 
@@ -82,4 +82,4 @@ Resolve bundled paths relative to this `SKILL.md`.
 
 ## Non-negotiable Outcome
 
-The result must read in one glance: the same real cat, nine familiar human-prop situations, one gentle wrongness per piece, two or three obvious graphic face-in-cover portrait accents, six small accents, and one cohesive flat sticker sheet. The cat-object mismatch creates the cuteness; the selective surreal portrait moments add interest; complexity does neither.
+Use this as the generation target, not a post-generation rejection checklist: the same real cat, nine familiar human-prop situations, one gentle wrongness per piece, two or three graphic face-in-cover accents, six small accents, and one cohesive flat sticker sheet. Accept normal renderer variation unless one of the three catastrophic delivery checks fails.
