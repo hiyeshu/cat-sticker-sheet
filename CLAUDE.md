@@ -10,6 +10,7 @@ scripts/ - 计划校验、Prompt 编译与成图审计机器闸门（3 Python �
 
 <config>
 SKILL.md - 仓库根入口与单 Skill 真源，可直接被 GitHub Skill 安装器发现
+README.md - 面向仓库访问者的安装、调用与目录导航，不复制运行规则
 CLAUDE.md - 项目宪法，维护根 Skill 与四个资源目录的边界
 .gitignore - 排除 macOS 元数据、Python 字节码、本地虚拟环境与运行 output，保持 Skill 包只含可安装真源
 </config>
