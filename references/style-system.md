@@ -1,7 +1,7 @@
 <!--
 [INPUT]: 依赖用户猫咪主体图与 SKILL.md 的固定输出契约
-[OUTPUT]: 对外提供 3:5 复古摄影拼贴贴纸版的身份、日常道具、版式、背景和单层白边视觉契约
-[POS]: references 的视觉真源；固定呈现效果，同时把内容荒诞度限制在一个日常错位
+[OUTPUT]: 对外提供 3:5 复古摄影拼贴贴纸版的身份、日常道具、少量图形化 face-in-cover、版式、背景和单层白边视觉契约
+[POS]: references 的视觉真源；以日常拟人轻错位为主体，用少量近超现实套壳肖像建立视觉高点
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
 
@@ -14,12 +14,14 @@
 - Exactly 2 large, 4 medium, and 3 small main stickers in a loose poster-collage rhythm.
 - The same source cat appears once in each main sticker and nowhere else: exactly nine cat depictions.
 - Keep the photographic cat face as the visual anchor. Hide the body or show only minimal shoulders or front paws required by the action.
-- Let a prop be worn, held, or operated. Use a face opening only when the ordinary object naturally forms a hood or cover.
+- Let most props be worn, held, or operated. Use 2–3 face-in-cover pieces as visual accents, never all nine.
+- In each face-in-cover piece, enlarge, wrap, or reshape one familiar object into an oversized shell; center the photographic cat face in one clean opening while the shell hides or replaces the body. Keep the source object recognizable at a glance.
 
 ## Visual Style
 
 - Deliberate low-fi photomontage: realistic cat fur and eyes, recognizable real-world props, and slightly handmade cut-paper edges.
 - High-saturation late-1990s/early-2000s pop-poster energy with simple flat printed highlights.
+- Make the face-in-cover accents obvious and graphic, with a bold readable silhouette and the presence of a near-surreal portrait. Keep the other pieces grounded in ordinary prop interaction so these accents remain punctuation rather than a new template.
 - Very light halftone or photocopy grain may appear on props, optional typography, or the background, never over the cat face.
 - Keep each object in its familiar material. Show ordinary fabric folds, plastic crinkles, ceramic surfaces, paper edges, metal reflections, or cable weight accurately.
 - Choose the background treatment for each sheet from its cat, props, and palette. Flat color, gentle gradients, subtle paper or print texture, soft glow, light falloff, and sparse low-contrast graphic motifs are all valid when they strengthen the cute effect, preserve clear gutters, and maintain visible contrast with the white contours.
@@ -29,8 +31,8 @@
 
 ## Tone
 
-The image should be cute because a real cat is calmly occupying an ordinary human situation. Do not push the cat toward generic kawaii design, and do not push the situation toward surreal spectacle. The ideal reaction is immediate recognition followed by a small “that is not quite right.”
+The image should be cute because a real cat is calmly occupying an ordinary human-prop situation. Do not push the cat toward generic kawaii design. Let a few face-in-cover pieces approach clear surreal portraiture, but keep every piece to one visual joke and avoid fantasy spectacle. The ideal reaction is immediate recognition, a small “that is not quite right,” then one or two stronger graphic surprises across the page.
 
 ## Anti-style
 
-Avoid personality diagnosis, fantasy roles, heroic or villainous lore, object hybrids, material substitution for its own sake, several props competing in one sticker, exaggerated reaction faces, full-body scenes, painterly art, cinematic lighting, glossy 3D, toy plastic, vector illustration, anime, chibi, plush redesign, watercolor, deep shadows, double outlines, packaging, photographed paper, hands holding the sheet, hard grids, copied inventory, duplicate faces, extra cats, or companions.
+Avoid personality diagnosis, fantasy roles, heroic or villainous lore, unreadable object hybrids, material substitution for its own sake, several props competing in one sticker, all-nine face-window repetition, exaggerated reaction faces, full-body scenes, painterly art, cinematic lighting, glossy 3D, toy plastic, vector illustration, anime, chibi, plush redesign, watercolor, deep shadows, double outlines, packaging, photographed paper, hands holding the sheet, hard grids, copied inventory, duplicate faces, extra cats, or companions.
