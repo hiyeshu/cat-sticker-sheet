@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# [INPUT]: 依赖一张已生成的贴纸版 raster 与 style-system.md 的画幅、纯色背景、单层白边与间隙契约
-# [OUTPUT]: 对外提供不依赖视觉模型的成图硬闸门：画幅比、背景纯度、连通域片数、出血、间隙、白边存在性与宽度一致性
+# [INPUT]: 依赖一张已生成的贴纸版 raster 与 style-system.md 的画幅、背景可分离性、单层白边与间隙契约
+# [OUTPUT]: 对外提供不依赖视觉模型的成图硬闸门：画幅比、背景覆盖、连通域片数、出血、间隙、白边存在性与宽度一致性
 # [POS]: scripts 的成图审计器，承担 quality-gate.md 前段的可判定检查，把计数与描边从 VLM 自评中剥离
 # [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 """用法:
@@ -21,7 +21,7 @@ except ImportError as e:
 
 ASPECT = 3 / 5
 ASPECT_TOL = 0.01
-BG_TOL = 60          # 与背景色的 L1 距离阈值
+BG_TOL = 90          # 与背景主色的 L1 距离阈值，容纳柔和渐变与轻微印刷纹理
 SPECK = 0.0008       # 小于画布此比例的连通块视为噪点
 WHITE_MIN = 200      # 白边判定：三通道最小值
 WHITE_SPREAD = 45    # 白边判定：三通道极差上限
@@ -29,12 +29,13 @@ AA_SKIP = 1          # 轮廓最外一圈是抗锯齿过渡，量白边时跳过
 
 
 def _components(a, bg, W, H):
-    """只把从画布边缘可达的背景算作背景。
+    """只把从画布边缘可达、接近背景主色的区域算作背景。
 
     编织篮的孔隙、条纹灯罩的亮条、与背景同色的挂牌，颜色都落在背景容差里；
     若不做外部可达性过滤，它们会被当成背景，让片数与白边测量全部失真。
     """
-    raw = np.abs(a - bg).sum(axis=2) < BG_TOL
+    near_white_contour = np.abs(a - 255).sum(axis=2) < 30
+    raw = (np.abs(a - bg).sum(axis=2) < BG_TOL) & ~near_white_contour
     seed = np.zeros_like(raw)
     seed[0, :] = seed[-1, :] = seed[:, 0] = seed[:, -1] = True
     bgmask = ndimage.binary_propagation(seed & raw, mask=raw)
@@ -60,19 +61,23 @@ def audit(path, expect=15):
     if abs(ar - ASPECT) > ASPECT_TOL:
         err.append(f"画幅比 {ar:.4f} 偏离 3:5 超过 {ASPECT_TOL}")
 
-    # 2 背景纯度
-    corners = [tuple(a[2, 2]), tuple(a[2, W - 3]), tuple(a[H - 3, 2]), tuple(a[H - 3, W - 3])]
-    bg = np.array(max(set(corners), key=corners.count))
+    # 2 背景可分离性：用边缘带中位数估计主色，允许柔和渐变与轻微印刷纹理
+    band = max(2, min(W, H) // 100)
+    border = np.concatenate((
+        a[:band, :, :].reshape(-1, 3),
+        a[-band:, :, :].reshape(-1, 3),
+        a[:, :band, :].reshape(-1, 3),
+        a[:, -band:, :].reshape(-1, 3),
+    ))
+    bg = np.median(border, axis=0).astype(int)
     bgmask, lbl, keep, sizes = _components(a, bg, W, H)
     cov = bgmask.mean()
     std = a[bgmask].std(axis=0).max() if bgmask.any() else 0
-    info.append(f"背景 rgb{tuple(int(x) for x in bg)}，覆盖 {cov*100:.1f}%，通道标准差 {std:.1f}")
+    info.append(f"背景主色 rgb{tuple(int(x) for x in bg)}，可分离覆盖 {cov*100:.1f}%，通道标准差 {std:.1f}")
     if cov < 0.15:
-        err.append(f"背景仅覆盖 {cov*100:.1f}%，间隙不足或存在满版元素")
-    if std > 12:
-        err.append(f"背景通道标准差 {std:.1f} 偏高 → 存在渐变、暗角、纹理或中心辉光")
-    elif std > 6:
-        warn.append(f"背景通道标准差 {std:.1f} → 轻微色调不均，交付时如实说明，勿称『数学纯色』")
+        err.append(f"可分离背景仅覆盖 {cov*100:.1f}%，贴纸间隙不足或背景变化过强")
+    if std > 30:
+        warn.append(f"背景通道标准差 {std:.1f} 较高；请视觉确认背景效果没有吞掉贴纸间隙")
 
     # 3 片数
     info.append(f"连通域片数 {len(keep)}")

@@ -32,7 +32,7 @@ Turn one real cat into a retro-pop photographic sticker family. The cat stays re
 - Keep the object recognizable, normally constructed, and materially believable. Do not add an unexpected material, second prop, fantasy role, or secondary gag unless the user explicitly asks.
 - Let the prop be worn, held, or operated. Use a clean face opening only when the object naturally forms a hood, cover, bag, towel, or shell; do not force telephones, cups, or handheld tools into face windows.
 - Treat telephone calls, a black plastic bag used as a hood, a baseball cap, a bath towel, or drinking coffee as calibration examples, never a mandatory inventory.
-- Use deliberate low-fi photomontage, high-saturation late-1990s/early-2000s poster energy, a perfectly flat solid background, and one pure-white die-cut contour around every piece.
+- Use deliberate low-fi photomontage, high-saturation late-1990s/early-2000s poster energy, a background treatment chosen for this sheet, and one pure-white die-cut contour around every piece.
 - Permit zero to two short labels. Quote approved text exactly and allow no other words, logos, watermarks, signatures, account names, or gibberish.
 - Use built-in image generation by default. Do not silently switch renderers.
 
@@ -69,7 +69,7 @@ Resolve bundled paths relative to this `SKILL.md`.
 ## Generate
 
 1. **Inspect the source.** Record one subject count and four to eight robust identity anchors. Treat unreadable or hidden traits as unknown.
-2. **Write the plan.** Use the schema: subject identity, page colors, nine ordinary action-object concepts, and six micro-stickers. Give every main sticker one `human_action`, one `object`, one `cat_interaction`, one `single_displacement`, and a natural `expression`.
+2. **Write the plan.** Use the schema: subject identity, page palette and background direction, nine ordinary action-object concepts, and six micro-stickers. Give every main sticker one `human_action`, one `object`, one `cat_interaction`, one `single_displacement`, and a natural `expression`.
 3. **Validate.** Run `python3 <skill-dir>/scripts/validate_plan.py <plan.json>`. Fix rejected fields; do not bypass the gate.
 4. **Compile.** Run `python3 <skill-dir>/scripts/compile_prompt.py <plan.json>`. Use the compiled text unchanged.
 5. **Generate from the real source.** When all inputs have local paths, pass the subject first and bundled anchor second through `referenced_image_paths`. When the subject exists only in conversation, include the smallest sufficient number of recent images and restate the written style. Never use both image-input mechanisms.

@@ -39,11 +39,11 @@ Input roles: Image 1 is the ONLY cat subject source and the sole authority for e
 
 TAIL = """One-step rule: keep one primary object and one readable human action in every main sticker. Keep the object's ordinary identity, expected material and familiar construction. Do not combine objects, invent material transformations, add a second joke, assign a fantasy role or build a narrative scene. If an object is handheld, do not turn it into a face shell. If an object naturally forms a hood or cover, use one clean face opening. Keep the cat body hidden or minimally cropped.
 
-Visual medium: deliberate low-fi photomontage with realistic cat fur, eyes and real-world prop textures; clean but slightly handmade cut-paper edges; high-saturation late-1990s/early-2000s pop-poster energy; simple flat printed highlights; very light halftone and photocopy grain on props and optional typography only. Keep the cat face clearer and more photographic than the surrounding collage. Expressions are restrained acting directions, not claims about the cat's personality.
+Visual medium: deliberate low-fi photomontage with realistic cat fur, eyes and real-world prop textures; clean but slightly handmade cut-paper edges; high-saturation late-1990s/early-2000s pop-poster energy; simple flat printed highlights; very light halftone and photocopy grain may appear on props, optional typography or the background, but not over the cat face. Keep the cat face clearer and more photographic than the surrounding collage. Expressions are restrained acting directions, not claims about the cat's personality.
 
 Sticker treatment: every one of the fifteen pieces has exactly one continuous pure-white die-cut contour of the same absolute width, about 2% of canvas width. No second outline, colored rim, halo, glow, bevel, layered edge, cast shadow or photographed paper depth. Every piece is fully inside the canvas with generous visible background gutter; nothing overlaps, touches, merges or clips.
 
-Avoid painterly art, cinematic lighting, 3D rendering, glossy toy plastic, smooth vector illustration, anime, chibi, plush or fuzzy mascot anatomy, watercolor, exaggerated reaction faces, full-body scenes, packaging, retail mockups, screenshots, hands holding the sheet, hard equal-cell grids, full-bleed scenery, gradient or textured backgrounds.
+Avoid painterly art, cinematic lighting, 3D rendering, glossy toy plastic, smooth vector illustration, anime, chibi, plush or fuzzy mascot anatomy, watercolor, exaggerated reaction faces, full-body scenes, packaging, retail mockups, screenshots, hands holding the sheet, or hard equal-cell grids.
 
 Final output: one flat printable-looking sticker sheet, not separate files."""
 
@@ -66,8 +66,9 @@ def compile_prompt(plan):
     output.append("")
 
     output.append(
-        f"Canvas: 3:5 portrait, flat front view, one perfectly solid {page['background']} "
-        "background with no gradient, vignette, glow, texture, scenery or lighting variation. "
+        f"Canvas: 3:5 portrait, flat front view. Background art direction: {page['background']}. "
+        "Use it to support the palette and cute effect while keeping clear visual gutters "
+        "and visible contrast with the pure-white contours. "
         "Arrange exactly 15 separated pieces: two large main stickers, four medium main "
         "stickers, three small main stickers, and six micro-stickers in the gaps."
     )

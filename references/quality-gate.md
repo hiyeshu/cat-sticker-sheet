@@ -15,7 +15,7 @@ Run first:
 python3 <skill-dir>/scripts/audit_sheet.py <image>
 ```
 
-It checks the 3:5 aspect, flat background, 15 separated components, bleed, gutters, white contours, and contour-width consistency. A nonzero exit is a rejection, not a warning to ignore.
+It checks the 3:5 aspect, background separation, 15 separated components, bleed, gutters, white contours, and contour-width consistency. A nonzero exit is a rejection, not a warning to ignore.
 
 ## Visual Gate
 
@@ -35,12 +35,12 @@ Then verify:
 - Expressions remain natural acting cues and do not turn the cat into nine unrelated cartoon personalities.
 - Worn items fit the head; operated items show only necessary paws; face openings appear only on objects that naturally form covers.
 - The result remains photographic low-fi collage, not 3D toy art, anime, chibi, plush, watercolor, or smooth vector illustration.
-- All fifteen pieces have one white contour, remain separated, and sit on one flat solid background.
+- All fifteen pieces have one white contour and remain separated. The background supports the sheet's palette and cute effect without swallowing the visible gutters or white-contour contrast.
 - Zero to two approved labels are spelled exactly; no extra words, logos, watermarks, signatures, account names, or gibberish appear.
 
 ## Correct Once
 
-If either gate fails, regenerate once with one targeted correction. Repeat the source-cat identity, 9+6 count, 2/4/3 rhythm, affected action-object concept, one-displacement rule, flat background, and single white contour. Do not add a new concept while fixing another.
+If either gate fails, regenerate once with one targeted correction. Repeat the source-cat identity, 9+6 count, 2/4/3 rhythm, affected action-object concept, one-displacement rule, background direction, and single white contour. Do not add a new concept while fixing another.
 
 Prioritize: wrong subject or extra cat; wrong counts or merged pieces; lost identity; unreadable action; multiple jokes in one sticker; style drift; border or text defects.
 
@@ -50,6 +50,6 @@ If the second result still fails, return the better image and name the exact rem
 
 - Do not claim a machine pass unless the script returned zero.
 - If visual inspection is unavailable, downgrade to prompt-only and say so.
-- Do not report eight cat faces as nine, a nearby prop as interaction, a complex scene as one-step absurdity, or a tonal background as mathematically flat.
+- Do not report eight cat faces as nine, a nearby prop as interaction, or a complex scene as one-step absurdity.
 
 For prompt-only delivery, require a passing plan, a placeholder-free compiled prompt, explicit identity anchors, nine action-object concepts, six micro-stickers, counts, background, and border constraints. State that no image was generated or visually inspected.

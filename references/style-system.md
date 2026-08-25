@@ -20,9 +20,9 @@
 
 - Deliberate low-fi photomontage: realistic cat fur and eyes, recognizable real-world props, and slightly handmade cut-paper edges.
 - High-saturation late-1990s/early-2000s pop-poster energy with simple flat printed highlights.
-- Very light halftone or photocopy grain may appear on props and optional typography, never over the cat face or background.
+- Very light halftone or photocopy grain may appear on props, optional typography, or the background, never over the cat face.
 - Keep each object in its familiar material. Show ordinary fabric folds, plastic crinkles, ceramic surfaces, paper edges, metal reflections, or cable weight accurately.
-- Use one perfectly flat saturated background. Default to cerulean blue near `#279DDA`; honor an explicit user color. No scenery, gradient, vignette, glow, grain, or lighting falloff.
+- Choose the background treatment for each sheet from its cat, props, and palette. Flat color, gentle gradients, subtle paper or print texture, soft glow, light falloff, and sparse low-contrast graphic motifs are all valid when they strengthen the cute effect, preserve clear gutters, and maintain visible contrast with the white contours.
 - Give all fifteen pieces one continuous pure-white die-cut contour of the same absolute width, about 2% of canvas width. No second rim, colored outline, halo, bevel, or shadow.
 - Keep every piece fully separated with visible background gutter. Nothing overlaps, touches, merges, or clips.
 - Permit zero to two short uppercase labels as micro-stickers. No other words, logos, watermarks, signatures, account names, labels, or gibberish.
@@ -37,4 +37,4 @@ Use `../assets/yellow-cat-collage-anchor.png` only for photographic cutouts, col
 
 ## Anti-style
 
-Avoid personality diagnosis, fantasy roles, heroic or villainous lore, object hybrids, material substitution for its own sake, several props competing in one sticker, exaggerated reaction faces, full-body scenes, painterly art, cinematic lighting, glossy 3D, toy plastic, vector illustration, anime, chibi, plush redesign, watercolor, deep shadows, double outlines, packaging, photographed paper, hands holding the sheet, hard grids, full-bleed scenery, copied inventory, duplicate faces, extra cats, or companions.
+Avoid personality diagnosis, fantasy roles, heroic or villainous lore, object hybrids, material substitution for its own sake, several props competing in one sticker, exaggerated reaction faces, full-body scenes, painterly art, cinematic lighting, glossy 3D, toy plastic, vector illustration, anime, chibi, plush redesign, watercolor, deep shadows, double outlines, packaging, photographed paper, hands holding the sheet, hard grids, copied inventory, duplicate faces, extra cats, or companions.

@@ -85,8 +85,11 @@ def check_minimum_contract(plan):
         extra = sorted(set(page) - set(PAGE_FIELDS))
         if extra:
             errors.append(f"page 不支持字段: {', '.join(extra)}")
-        if not isinstance(page.get("background"), str) or not re.fullmatch(r"#[0-9A-Fa-f]{6}", page.get("background", "")):
-            errors.append("page.background 必须是 #RRGGBB")
+        background = page.get("background")
+        if not isinstance(background, str) or not background.strip():
+            errors.append("page.background 必须是非空的背景艺术方向")
+        elif len(background) > 240:
+            errors.append("page.background 不得超过 240 字符")
         palette = page.get("palette")
         if not isinstance(palette, list) or not 3 <= len(palette) <= 6:
             errors.append("page.palette 必须包含 3–6 个颜色")

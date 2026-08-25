@@ -31,7 +31,9 @@
       "properties": {
         "background": {
           "type": "string",
-          "pattern": "^#[0-9A-Fa-f]{6}$"
+          "minLength": 1,
+          "maxLength": 240,
+          "description": "每页独立的背景艺术方向，可为颜色、渐变、纸张质感、柔光或低对比图形；不设固定默认色，并与白色描边保持可见对比"
         },
         "palette": {
           "type": "array",
