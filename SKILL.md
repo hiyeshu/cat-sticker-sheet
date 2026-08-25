@@ -13,7 +13,7 @@ description: >-
 
 <!--
 [INPUT]: 依赖一张清晰单猫主体图、references/ 的身份/日常错位/少量 face-in-cover 视觉规则、优先使用的原生生图工具，以及仅在原生生图工具缺席时启用的 GD CLI 兜底
-[OUTPUT]: 对外提供一张 3:5 复古摄影拼贴猫咪贴纸版、实际使用的最终 Prompt 与视觉质量结论
+[OUTPUT]: Generate 模式对外提供一张 3:5 复古摄影拼贴猫咪贴纸版及其可点击绝对文件地址；Prompt-only 模式仅提供最终 Prompt
 [POS]: cat-sticker-sheet 的单一执行入口；以「真实猫身份 + 普通人类道具 + 一个轻微错位」为主体，用少量图形化套壳肖像提升趣味，防止性格臆测、复杂世界观和过度荒诞
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
@@ -39,7 +39,7 @@ Turn one real cat into a retro-pop photographic sticker family. The cat stays re
 
 ## Route The Request
 
-- **Generate — default:** inspect the cat, write the final prompt, generate, inspect, correct once if needed, and return the selected sheet plus the exact prompt used.
+- **Generate — default:** inspect the cat, write the final prompt internally, generate, inspect, correct once if needed, persist the selected sheet, and return only the image preview plus its absolute file path.
 - **Prompt-only:** write the same final prompt, but do not claim that an image was generated or inspected.
 - **Missing source:** ask for the cat image when the request points to “this cat” but no usable image exists.
 - **Multiple cats:** ask which cat should lead when the source does not have one unambiguous subject. Never mix several cats on one sheet.
@@ -67,7 +67,7 @@ Resolve bundled paths relative to this `SKILL.md`.
 3. **Choose the renderer.** Apply the native-first rule above; use `references/gd-cli.md` only for fallback.
 4. **Generate from the real source.** Pass only user-provided or task-required images, with the subject first. On the native route, use `referenced_image_paths` for local inputs or the smallest sufficient `num_last_images_to_include` for conversation-only inputs; never use both mechanisms. On the GD CLI fallback route, follow `references/gd-cli.md`. Never pass the bundled anchor to any renderer.
 5. **Inspect.** Apply `references/quality-gate.md` to the actual image. Regenerate once with one targeted correction if it fails, using the already-selected renderer only.
-6. **Return honestly.** Return the selected image, exact final prompt, visual review result, and one precise remaining limitation if any. Save project-bound outputs under `output/cat-sticker-sheets/`, never inside the installed Skill.
+6. **Persist and return compactly.** Save every selected generated image under the active project's `output/cat-sticker-sheets/`, never inside the installed Skill. Return the image preview and a clickable absolute path to that file. In Generate mode, do not include the final prompt, mode, identity summary, visual-review status, or routine quality explanation. Add one brief limitation only when no compliant result can be produced. In Prompt-only mode, return only the final prompt because no image file exists.
 
 ## Return Shape
 
@@ -76,19 +76,12 @@ Resolve bundled paths relative to this `SKILL.md`.
 
 ![Cat sticker sheet](absolute-image-path-or-rendered-image)
 
-**最终 Prompt**
+**输出文件**
 
-```text
-[exact final prompt]
-```
-
-**说明**
-
-- Mode: [Generate / Prompt-only]
-- Cat identity: [visible type + preserved anchors]
-- Visual review: [pass, fail, or not run]
-- Quality: [pass, corrected once, or one precise limitation]
+[cat-sticker-sheet.png](/absolute/path/to/output/cat-sticker-sheets/cat-sticker-sheet.png)
 ````
+
+For Prompt-only requests, return only the final prompt in a text code block and omit the image and output-file sections.
 
 ## Non-negotiable Outcome
 
