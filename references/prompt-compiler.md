@@ -20,7 +20,7 @@
 | 主体变量 | 品种/类型证据、识别锚点、visual_persona、generative_cue | JSON `subject` | 每猫变 |
 | 内容变量 | 九个猫头造型的表情、物件、特殊材质、受力与荒诞落点，六装饰 | JSON `pieces` / `accents` | **每页必须全变** |
 
-排除项不进 JSON——那是 `ledger.json` 加校验器的职责。JSON 只描述这一页**是**什么。
+排除项不进 plan JSON——那是 `anchor-exclusions.json`、项目运行 ledger 与校验器的职责。plan JSON 只描述这一页**是**什么。
 
 > **正面描述归 JSON，负面约束归编译器和校验器，IP 边界只留在 SKILL.md。**
 
@@ -45,14 +45,16 @@
 
 ```bash
 # 1. 结构闸门。不通过就不许编译，更不许出图。
-python3 scripts/validate_plan.py plan.json --ledger output/cat-sticker-sheets/ledger.json
+python3 <skill-dir>/scripts/validate_plan.py <plan.json> --ledger <active-project>/output/cat-sticker-sheets/ledger.json
 
 # 2. 编译成 backend-neutral prompt
-python3 scripts/compile_prompt.py plan.json -o prompt.txt
+python3 <skill-dir>/scripts/compile_prompt.py <plan.json> -o <prompt.txt>
 
 # 3. 出图、成图审计（见 quality-gate.md）、通过后记账
-python3 scripts/validate_plan.py plan.json --ledger output/cat-sticker-sheets/ledger.json --append
+python3 <skill-dir>/scripts/validate_plan.py <plan.json> --ledger <active-project>/output/cat-sticker-sheets/ledger.json --append
 ```
+
+调用项目的 ledger 不存在时无需预建；校验器仍会加载 Skill 内只读的 `references/anchor-exclusions.json`，首次 `--append` 时再在调用项目创建运行账本。
 
 校验器拒收时，**修计划，不要绕过校验器**。拒收信息已经指明是哪一片、哪个字段。
 

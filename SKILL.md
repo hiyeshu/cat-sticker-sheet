@@ -35,7 +35,7 @@ Turn one cat source into a cohesive family of photographic collage stickers: the
 - Allocate the nine pieces across **nine distinct integration mechanisms in a bijection**; `nests` and `face_window` carry one slot each. Nine copies of the same construction are a failure even when the objects differ.
 - Derive object, material, and expression choices partly from **this cat's own genome and visual persona** (`generative_cue`). At least three concepts must stop working if the cat were swapped; at least six must explain their `persona_fit`.
 - Treat user examples such as fruit-peel headwear, towels, baseball, or coffee as seed directions only. Invent a new inventory for each run; never turn examples into a mandatory checklist.
-- Keep the cross-output exclusion ledger on disk at `output/cat-sticker-sheets/ledger.json`. Deduplicate by semantic slot — object name, displaced expectation, and `mechanism × domain` — never by a hand-maintained blacklist of nouns.
+- Keep the cross-output runtime ledger in the active project at `output/cat-sticker-sheets/ledger.json`. `validate_plan.py` always merges the bundled read-only `references/anchor-exclusions.json` seed, then adds project history when present. Never write generated output back into the installed Skill.
 - Use the photographic cut-paper collage grammar in `references/style-system.md`: realistic cat fur, tactile real-world materials, high-saturation retro color blocking, deadpan humor, slightly imperfect hand-cut contours, and restrained depth.
 - Use one continuous white die-cut contour only. Never add a second colored outline, outer glow, layered rim, halo, or thick drop shadow.
 - Default to a flat warm yellow background derived from the bundled anchor. Treat background color as a page-level variable: honor an explicit user color, but keep it one clean solid treatment with no scenery or texture.
@@ -74,17 +74,18 @@ Three scripts carry the checks that must not depend on model tier:
 - `scripts/audit_sheet.py` — raster gate: aspect, background solidity, piece count, bleed, gutter, single white contour.
 
 Run them. Do not reimplement their judgements in prose, and do not report a pass they did not give.
+Resolve every bundled path relative to the directory containing this `SKILL.md`, never relative to the user's active-project working directory.
 
 ## Generate The Sheet
 
 1. **Inspect every input.** View each usable image before describing it. Record dimensions, role, subject count, robust cat anchors, source palette, visible objects, and every mark classified as intentional label, incidental text, signature, watermark, or UI. Do not guess unreadable traits.
 2. **Write identity and visual persona.** Follow `references/subject-genome.md`. Record observed anchors separately from the inferred visual persona; write its expression language and avoid list; derive one `generative_cue` that drives object, material, or expression choice. If breed is user-provided, preserve its visible markers; otherwise write `unknown`. Lock heterochromia and asymmetric-marking orientation explicitly.
 3. **Write the sheet plan JSON.** Follow `references/shell-variation.md` and `references/sheet.schema.json`: one seed, page system, nine mechanism-slotted cat-head pieces, at least five expressions, at least four material classes, at least two high-absurdity pieces, a filled `displaces`/`wearable_fit`/`persona_fit` for every piece, and six accents of which at least four are residues. Warm saturated yellow background by default; in a batch, vary page systems unless the user locks them.
-4. **Gate the plan.** Run `python3 scripts/validate_plan.py plan.json --ledger output/cat-sticker-sheets/ledger.json`. On rejection, fix the plan — never bypass the gate, never argue with it in prose.
-5. **Compile the prompt.** Run `python3 scripts/compile_prompt.py plan.json`. Do not hand-write renderer prompts; do not add brand names or negative lists to its output.
+4. **Gate the plan.** Run `python3 <skill-dir>/scripts/validate_plan.py <plan.json> --ledger <active-project>/output/cat-sticker-sheets/ledger.json`. A missing project ledger is valid: the validator still loads `references/anchor-exclusions.json`. On rejection, fix the plan — never bypass the gate.
+5. **Compile the prompt.** Run `python3 <skill-dir>/scripts/compile_prompt.py <plan.json>`. Do not hand-write renderer prompts; do not add brand names or negative lists to its output.
 6. **Generate with the actual source.** Use built-in image generation. When every required image has a local path, pass the subject source first and the bundled yellow anchor second through `referenced_image_paths`; append any user style reference after them. When the subject exists only in conversation, use the smallest `num_last_images_to_include` that contains it and restate the complete written style grammar; never drop the subject merely to include the bundled anchor. Never use both image-input mechanisms.
-7. **Gate the raster.** Run `python3 scripts/audit_sheet.py <image>` first; on pass, apply the vision gate in `references/quality-gate.md` — enumerate all fifteen rows, including identity anchors, expression, material behavior, and wearable fit. If either gate fails, regenerate once with one targeted correction while repeating the full cat identity, visual persona, counts, border, text, source-role, and anchor-boundary constraints.
-8. **Persist and return.** For project-bound work, copy the selected output into `output/cat-sticker-sheets/` without overwriting an existing file, then append the plan to the ledger with `validate_plan.py --append`. For preview-only work, render it inline. Return the selected image, the plan JSON, the compiled prompt, and any remaining limitation stated precisely.
+7. **Gate the raster.** Run `python3 <skill-dir>/scripts/audit_sheet.py <image>` first; on pass, apply the vision gate in `references/quality-gate.md` — enumerate all fifteen rows, including identity anchors, expression, material behavior, and wearable fit. If either gate fails, regenerate once with one targeted correction while repeating the full cat identity, visual persona, counts, border, text, source-role, and anchor-boundary constraints.
+8. **Persist and return.** For project-bound work, write the selected output and runtime ledger under the active project's `output/cat-sticker-sheets/`, never inside the installed Skill. Append the accepted plan with `python3 <skill-dir>/scripts/validate_plan.py <plan.json> --ledger <active-project>/output/cat-sticker-sheets/ledger.json --append`. For preview-only work, render inline. Return the selected image, plan JSON, compiled prompt, and any remaining limitation.
 
 ## Respect The Yellow Anchor Boundary
 
@@ -97,7 +98,7 @@ Borrow only:
 Do not copy:
 
 - the anchor cat's gray-mask/cream-coat traits when the user's cat differs;
-- its objects, material pairings, phrases, and accent set — earlier inventory is seeded in `output/cat-sticker-sheets/ledger.json`, so `validate_plan.py` rejects it like any prior sheet; do not additionally maintain a prose blacklist;
+- its objects, material pairings, phrases, and accent set — this inventory lives only in `references/anchor-exclusions.json`, so `validate_plan.py` rejects it without shipping generated output or maintaining a prose blacklist;
 - its exact sticker positions, palette mapping, yellow lighting, brands, logos, or composition.
 
 Never mention or reproduce an external artist, collaboration, coffee brand, existing mascot, watermark, or signature. Describe and execute the visual mechanism in original terms.

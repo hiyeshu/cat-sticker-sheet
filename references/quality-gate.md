@@ -12,7 +12,7 @@
 ## 闸门一：机器（强制，先跑）
 
 ```bash
-python3 scripts/audit_sheet.py <成图路径>
+python3 <skill-dir>/scripts/audit_sheet.py <成图路径>
 ```
 
 它判定这些，无需视觉模型：画幅比是否 3:5、背景是否单一纯色（通道标准差）、连通域是否 15 片、有无出血、最小间隙、每片是否有白色外轮廓、白边宽度是否成一套系统。

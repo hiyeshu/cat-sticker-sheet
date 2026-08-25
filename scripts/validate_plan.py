@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# [INPUT]: 依赖 references/sheet.schema.json 的猫咪性格、材质、表情字段契约与 output/cat-sticker-sheets/ledger.json 的历史成图档位
-# [OUTPUT]: 对外提供出图前的结构硬闸门（机制双射、荒诞落点、尺度/领域/材质/表情配额、装饰余波、跨成图去重）与 ledger 追加
+# [INPUT]: 依赖 references/sheet.schema.json 的字段契约、references/anchor-exclusions.json 的锚点排除种子与可选调用项目 ledger
+# [OUTPUT]: 对外提供出图前的结构硬闸门（机制双射、荒诞落点、尺度/领域/材质/表情配额、装饰余波、跨成图去重）与项目 ledger 追加
 # [POS]: scripts 的计划校验器，把 shell-variation.md 中可判定的猫头变化与材质错位规则变成机器拒收条件，被 SKILL.md 第 4 步调用
 # [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 """用法:
@@ -167,6 +167,17 @@ def check_ledger(plan, ledger):
     return err, warn
 
 
+def load_ledger(seed_path, runtime_path=None):
+    """始终加载只读锚点种子；运行账本存在时按 sheet_id 合并，后者覆盖同名项。"""
+    entries = json.load(open(seed_path, encoding="utf-8"))
+    if runtime_path and os.path.exists(runtime_path):
+        entries += json.load(open(runtime_path, encoding="utf-8"))
+    merged = {}
+    for i, item in enumerate(entries):
+        merged[item.get("sheet_id", f"__anonymous_{i}")] = item
+    return list(merged.values())
+
+
 def entry(plan):
     return {
         "sheet_id": plan["sheet_id"],
@@ -183,22 +194,23 @@ def entry(plan):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("plan")
-    ap.add_argument("--ledger", default=None, help="ledger.json 路径；不传则跳过跨成图检查")
-    ap.add_argument("--append", action="store_true", help="通过后把本页追加进 ledger")
+    ap.add_argument("--ledger", default=None, help="调用项目的 ledger.json；锚点排除种子始终自动加载")
+    ap.add_argument("--append", action="store_true", help="通过后把本页追加进调用项目 ledger（需要 --ledger）")
     a = ap.parse_args()
+    if a.append and not a.ledger:
+        ap.error("--append 需要同时提供 --ledger")
 
     plan = json.load(open(a.plan, encoding="utf-8"))
     here = os.path.dirname(os.path.abspath(__file__))
     schema = os.path.join(here, "..", "references", "sheet.schema.json")
+    seed_ledger = os.path.join(here, "..", "references", "anchor-exclusions.json")
 
     err, degraded = check_schema(plan, schema)
     if degraded:
         print("  ! 未安装 jsonschema，已降级为最小字段检查（pip install jsonschema 可开启完整校验）")
     if not err:
         e2, w2 = check_structure(plan)
-        ledger = []
-        if a.ledger and os.path.exists(a.ledger):
-            ledger = json.load(open(a.ledger, encoding="utf-8"))
+        ledger = load_ledger(seed_ledger, a.ledger)
         e3, w3 = check_ledger(plan, ledger)
         err, warn = e2 + e3, w2 + w3
     else:
@@ -214,7 +226,6 @@ def main():
     if err:
         return 1
     if a.append and a.ledger:
-        ledger = json.load(open(a.ledger, encoding="utf-8")) if os.path.exists(a.ledger) else []
         ledger = [e for e in ledger if e.get("sheet_id") != plan["sheet_id"]] + [entry(plan)]
         os.makedirs(os.path.dirname(os.path.abspath(a.ledger)), exist_ok=True)
         json.dump(ledger, open(a.ledger, "w", encoding="utf-8"), ensure_ascii=False, indent=2)

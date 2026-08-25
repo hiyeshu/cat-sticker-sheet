@@ -1,5 +1,5 @@
 <!--
-[INPUT]: 依赖 subject-genome.md 的猫咪基因、visual_persona 与 generative_cue，style-system.md 的猫头 9+6 契约，以及 output/cat-sticker-sheets/ledger.json 的历史档位
+[INPUT]: 依赖 subject-genome.md 的猫咪基因、visual_persona 与 generative_cue，style-system.md 的猫头 9+6 契约、anchor-exclusions.json 与调用项目 ledger
 [OUTPUT]: 对外提供机制先行的九槽位分配法、荒诞落点、意外材质、性格化表情、猫头穿戴受力、因果余波装饰与跨成图去重
 [POS]: references 的内容发明引擎，把熟悉物件、特殊材质、猫咪气质和可信穿戴组合成 sheet plan JSON，再交由 validate_plan.py 裁决
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
@@ -116,7 +116,7 @@
 
 ## 跨成图去重：语义档位，不是词面黑名单
 
-历史成图落在 `output/cat-sticker-sheets/ledger.json`，由 `scripts/validate_plan.py --ledger` 读取。三条判据：
+锚点库存固定在 Skill 的 `references/anchor-exclusions.json`；历史成图落在调用项目的 `output/cat-sticker-sheets/ledger.json`。`scripts/validate_plan.py --ledger` 自动合并两者。三条判据：
 
 - `object` 完全同名 → 永久拒收；
 - `displaces` 的荒诞落点重复 → 永久拒收；
@@ -124,7 +124,7 @@
 
 **不再维护手写的物件黑名单。**词面级排除挡不住语义重复——「沙拉甩干器」和「滤水篮」是同一个原型，「文件分格架」和「分格收纳盒」是同一个原型。手写清单还会随每张成图线性膨胀，最终污染上下文并与磁盘上的真实产物失去同步。
 
-黄色锚点的九件物件同样由 ledger 的首条记录承担排除，不再复述。
+黄色锚点的具体库存只由 `anchor-exclusions.json` 承担排除，不再复述，也不把任何生成样例打进 Skill 包。
 
 ## freeform 逃生舱
 

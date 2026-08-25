@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "cat-sticker-sheet / sheet plan",
-  "_protocol": "[INPUT]: 依赖 subject-genome.md 的猫咪身份与视觉性格、shell-variation.md 的猫头造型槽位分配，以及 style-system.md 的 9+6 契约; [OUTPUT]: 对外提供一页贴纸的唯一真源 JSON，被 compile_prompt.py、validate_plan.py、ledger.json 与 evals 共同消费; [POS]: references 的内容契约层，把每猫性格、每片表情与材质错位从固定渲染语法中分离出来; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
-  "description": "只描述这一页【是什么】。不变的产物契约在 compile_prompt.py 里；排除项在 ledger.json 里；IP 边界只留在 SKILL.md 里，三者都不进本文件。",
+  "_protocol": "[INPUT]: 依赖 subject-genome.md 的猫咪身份与视觉性格、shell-variation.md 的猫头造型槽位分配，以及 style-system.md 的 9+6 契约; [OUTPUT]: 对外提供一页贴纸的唯一真源 JSON，被 compile_prompt.py、validate_plan.py 与项目运行 ledger 共同消费; [POS]: references 的内容契约层，把每猫性格、每片表情与材质错位从固定渲染语法中分离出来; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
+  "description": "只描述这一页【是什么】。不变的产物契约在 compile_prompt.py；排除项在 anchor-exclusions.json 与项目 ledger；IP 边界只留在 SKILL.md，三者都不进本文件。",
   "type": "object",
   "required": ["sheet_id", "seed", "subject", "page", "pieces", "accents"],
   "additionalProperties": false,

@@ -2,15 +2,18 @@
 Agent Skills spec + Markdown/YAML/JSON contracts + Python 机器闸门 + built-in image generation
 
 <directory>
-skills/ - 可发现、可安装的 Skill 真源（1 子目录: cat-sticker-sheet，含 references/scripts/assets/evals）
-output/ - 使用 Skill 生成并验收的项目内产物（1 子目录: cat-sticker-sheets，内含跨成图排除账本 ledger.json）
+agents/ - Codex UI 元数据（1 文件: openai.yaml）
+assets/ - 生成时使用的原创视觉锚点（1 文件: yellow-cat-collage-anchor.png）
+references/ - 身份、性格、材质、Prompt、Schema、质量门与锚点排除种子（8 文件）
+scripts/ - 计划校验、Prompt 编译与成图审计机器闸门（3 Python 文件）
 </directory>
 
 <config>
-CLAUDE.md - 项目宪法，维护仓库级边界与唯一真源位置
-.gitignore - 排除 macOS 元数据、Python 字节码与本地虚拟环境，保持 Skill 仓库可安装且无运行噪声
+SKILL.md - 仓库根入口与单 Skill 真源，可直接被 GitHub Skill 安装器发现
+CLAUDE.md - 项目宪法，维护根 Skill 与四个资源目录的边界
+.gitignore - 排除 macOS 元数据、Python 字节码、本地虚拟环境与运行 output，保持 Skill 包只含可安装真源
 </config>
 
-法则：黄色成图是视觉机制锚点，不是猫咪身份、性格、具体道具、材质配对、文字或排版模板；目标猫图片始终是主体真源。每猫的外貌锚点与 visual_persona 驱动物件、表情和特殊材质。可判定契约由 scripts 机器闸门裁决，历史排除以 output/cat-sticker-sheets/ledger.json 为唯一账本。
+法则：仓库根就是完整 Skill，禁止再包 `skills/<name>/`。黄色成图是视觉机制锚点，不是猫咪身份、性格、具体道具、材质配对、文字或排版模板；目标猫图片始终是主体真源。可判定契约由 scripts 机器闸门裁决；仓库只保存 anchor-exclusions.json，运行历史写入调用项目的 output/cat-sticker-sheets/ledger.json，不回流 Skill 包。
 
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
