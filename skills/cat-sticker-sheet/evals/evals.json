@@ -1,0 +1,84 @@
+{
+  "_protocol": "[INPUT]: realistic cat-head sticker requests and optional images; [OUTPUT]: reusable behavioral expectations for cat-sticker-sheet; [POS]: forward-test fixtures for routing, identity/persona extraction, surreal wearable and special-material planning, prompt compilation, and quality gates; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
+  "skill_name": "cat-sticker-sheet",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Use $cat-sticker-sheet to turn this attached cat photo into a complete sticker sheet.",
+      "expected_output": "Inspects the cat, writes an evidence-based identity genome and image-based visual persona, uses the cat as Image 1 and the bundled yellow image only as Image 2 style anchor, plans nine distinct cat-head wearables plus six accents, generates one 3:5 sheet, counts exactly nine cat heads, inspects it, and returns the raster plus exact final prompt.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "这只猫一只眼睛蓝、一只眼睛棕，做成家居用品套壳贴纸。",
+      "expected_output": "Records heterochromia and frontal eye orientation in the identity genome, keeps breed unknown unless supplied, repeats the anchors in the production prompt, rejects any sheet that homogenizes or swaps visible eye colors, and never imports the anchor cat's traits as identity evidence.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "还是这个逻辑，但背景换成纯绿色，其他风格不变。",
+      "expected_output": "Treats background as a page-level variable, uses one clean saturated green field with no gradient or texture, preserves the photographic collage, shell mechanism, 9+6 counts, single white border, and source-cat genome, and does not treat yellow as mandatory.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "做得日常可爱一点，全部用家里的东西，但别和示例一模一样。",
+      "expected_output": "Derives a generative_cue and visual persona from this cat, allocates nine head-led pieces across nine mechanisms with nests and face_window holding one slot each, fills displaces, wearable_fit, material_behavior, expression, and persona_fit for every piece, spans at least six domains and four material classes, derives at least four accents as residues, and passes scripts/validate_plan.py before compiling.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "这张照片里有三只猫，做成这个贴纸版。",
+      "expected_output": "Inspects prominence and asks one focused question about which cat should lead unless the user already identifies it; it does not generate three-, two-, or mixed-cat main stickers by default.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "只给我最终 Prompt，不要出图；两枚英文写 STILL HERE 和 ZERO ENERGY。",
+      "expected_output": "Uses Prompt-only mode, returns a bracket-free prompt with all nine shells and six accents enumerated, quotes both labels exactly, prohibits every other text, and does not claim generation or inspection.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "把这只猫做成贴纸，不要 3D，也不要两层描边。",
+      "expected_output": "Locks photographic cut-paper collage rather than plush, clay, cartoon, or glossy 3D rendering; requires exactly one continuous white contour with no colored rim, halo, layered stroke, or thick shadow; inspects those constraints in the raster.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "这三张分别是三只猫，都运行 $cat-sticker-sheet，各来一张，但别只换猫。",
+      "expected_output": "Treats the inputs as three independent single-cat runs, never mixes cats on one sheet, derives a distinct visual persona and expression language per cat, assigns each sheet a different seed, material system, layout, accent language, and page palette, validates every plan against output/cat-sticker-sheets/ledger.json, and rejects reused semantic slots.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "生成之后直接告诉我质量怎么样。",
+      "expected_output": "Runs scripts/audit_sheet.py on the raster before any verdict, then enumerates all fifteen pieces as rows including object-material pairing, mechanism, absurdity target, expression, wearable fit, and preserved identity anchors; if either gate fails it regenerates once with one targeted correction and never contradicts the machine gate.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "在一个没有 Python 也看不了图的环境里跑这个 skill。",
+      "expected_output": "Downgrades honestly: hand-transcribes the compiler field order, states the plan is machine-unverified, delivers prompt-only output with an explicit no-visual-inspection disclaimer, and does not claim any gate passed.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "这只猫看起来很乖，另一只很机灵，各做一张，不要只换毛色。",
+      "expected_output": "Creates separate sheets, records each visual persona as an image-based impression rather than true temperament, gives them different expression languages and avoid lists, and requires at least six persona-fit concepts per sheet while preserving each cat's physical identity.",
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "可以有西瓜皮、浴巾、棒球、咖啡这种感觉，但这些只是例子。",
+      "expected_output": "Treats all named items as inspiration seeds rather than mandatory or reusable inventory, invents a fresh cross-domain set, and records each final concept explicitly in plan JSON instead of copying the example list.",
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "穿戴物再荒诞一点，材质要特别，但猫还是这只猫。",
+      "expected_output": "Preserves breed/type and visible identity anchors, uses at least four material classes and two high-absurdity concepts, states visible material behavior and physical head-or-ear fit for every piece, and rejects flat recolors, identity-obscuring props, or random clutter.",
+      "files": []
+    }
+  ]
+}

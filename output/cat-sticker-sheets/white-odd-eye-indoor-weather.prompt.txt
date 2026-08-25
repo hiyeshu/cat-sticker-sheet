@@ -1,0 +1,48 @@
+[INPUT]: 依赖白色短毛异色瞳猫主体图与黄色风格锚点
+[OUTPUT]: 对外记录 white-odd-eye-indoor-weather.png 实际使用的完整生成 Prompt
+[POS]: 选中白猫成图的可复现运行证据，不参与 Skill 触发或规则定义
+[PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+
+Use case: stylized-concept
+Asset type: one finished portrait photographic cut-paper collage die-cut sticker sheet
+
+Primary request: Create a new, highly imaginative cat-specific sticker sheet from the single cat in Image 1: exactly nine cute surreal household-object transformations plus exactly six theme-derived accent stickers. This must feel like a tiny invented domestic world, not a template with the same cat face pasted into nine holes.
+
+Input roles: Image 1 is the only cat subject source and the authority for every cat trait. Image 2 is a yellow style anchor only. Borrow only its photographic cut-paper collage medium, tactile real-material contrast, saturated retro color energy, playful scale, dry humor, sparse accents, and single white die-cut border. Do not copy Image 2's gray-mask cat, coat, eyes, exact objects, text, brands, positions, layout, yellow lighting falloff, inventory, or composition. The written concept below overrides Image 2.
+
+Cat genome: one compact round-faced short-haired cat; creamy-white plush coat; faint warm beige shading on ear tips, forehead center, and bridge above a small pink nose; pale muzzle and chest; upright triangular ears with pink inner ears; long white whiskers; viewer-left eye distinctly blue-gray around a dark pupil and viewer-right eye distinctly much darker deep green-gray/charcoal; calm alert frontal attitude. Preserve this visible mismatched-eye relationship and all coat anchors in every face. Keep the cat photographic with real short fur and natural eyes. Exactly one depiction of this cat appears in each main sticker, exactly nine cat depictions total, and no cat appears in the six accents.
+
+Concept seed: "Tiny Indoor Weather" — the white cat behaves like a small piece of soft weather that household objects are trying to contain. Domestic mood: a quiet magical stay-at-home morning. Material contrast: translucent acrylic and fluffy terry/quilt. Visual-joke rule: each object reacts differently to the cat as cloud, warmth, bubble, filling, or tiny machine operator. Palette: solid sunshine yellow background with cobalt, coral, mint, lavender, peach, clear acrylic, and cream. Composition: one large central hero with an asymmetrical diagonal orbit and curved visual path; do not use a regular three-column stack.
+
+Previous-output exclusion: do not use or resemble a colander, rolled bath mat, tissue-box window, quilted dustpan caddy, cloud-shaped face cushion, enamel mixing bowl, clear zipper pouch, compartment organizer, tape-dispenser shell, paw print, fabric fish, yarn ball, clothespin, "SOFT MODE", or "NO RUSH". Also exclude every exact object, phrase, and position from Image 2.
+
+Canvas/backdrop: 3:5 portrait, flat front view, one clean saturated sunshine-yellow background near #FFC21A. No gradient, vignette, glow, texture, pattern, scenery, floor, or lighting variation. Arrange exactly 15 independent pieces with generous visible yellow gutters; no touching, overlap, merging, or clipping.
+
+Nine imaginative household transformations:
+1. Large central hero — an oversized peach quilted pillowcase opens diagonally like an envelope; the cat's compact torso spills out as the pillow's own fluffy white filling, front paws resting on the folded flap. Integration: becomes filling + spills from. Visual joke: the pillow cannot contain this tiny cloud.
+2. Large corner hero — a translucent cobalt salad-bowl dome becomes a tiny indoor weather capsule; the whole compact cat curls beneath the clear dome while two ears gently press the top, one paw touching the rim. Integration: nests beneath. Visual joke: mismatched eyes look like a private moon and storm cloud.
+3. A lavender terry shower cap is worn as a soft bubble bonnet around the head and upper torso; ears lift the elastic into two peaks instead of sitting in a circular face hole. Integration: wears. Visual joke: the bath cloud has ears.
+4. A mint accordion document file folds around the seated cat in a zigzag fan; paws and ears appear between different pastel tabs, making the file look alive. Integration: folds around + nests between. Visual joke: the cat is the missing document.
+5. A tangerine hand-crank salad spinner becomes a tiny weather machine; one compact cat body sits in the clear basket while one paw visibly operates the crank and the other steadies the rim. Integration: operates. Visual joke: spinning up an indoor breeze.
+6. A coral ribbed hot-water-bottle cover wraps the cat's torso; the cat hugs the stopper with both paws and its cream fur becomes the soft warm center rather than a centered face window. Integration: wraps + replaces filling. Visual joke: portable sunshine with whiskers.
+7. A teal indoor watering can carries one cat body in its open top; the fluffy tail curls alongside the handle while one paw reaches toward the spout, as if directing a tiny rain cloud. Integration: rides inside + interacts. Visual joke: the cloud waters the houseplants.
+8. An open butter-yellow powder compact holds the cat's round fluffy torso as the powder puff; paws sit on the compact edge and the hinged lid forms a crescent behind it. Integration: replaces soft tool. Visual joke: too fluffy to close.
+9. A nested tower of coral, mint, and lavender measuring cups forms a playful layered skirt around the standing compact cat; one paw hooks a cup handle and the upper body remains visible. Integration: wears + stacks through. Visual joke: measuring exactly one cup of cloud.
+
+Use at least these seven visibly different integration strategies: spilling-from, nesting-under, wearing, folding-around, operating, wrapping/becoming-filling, riding/interacting, replacing-a-tool, and stacked-wearing. No more than two centered face-only compositions. Show paws or compact torso in at least six pieces.
+
+Six theme-derived accents:
+10. one tiny sunshine-yellow fabric weather tag with a simple stitched sun icon and no words
+11. one small cluster of three translucent soap bubbles
+12. one mint miniature house key with a rounded head
+13. one coral square quilt patch with four oversized cream stitches
+14. exact text "SOFT FORECAST" in chunky cream uppercase hand-cut lettering
+15. exact text "STAY IN" in chunky cobalt uppercase hand-cut lettering
+
+Style/medium: high-quality photographic cut-paper collage with believable real cat fur and tactile quilted cotton, terry cloth, ribbed rubber, translucent acrylic, folded paper, hard plastic, and enamel-like surfaces. Lively retro color blocking, slightly imperfect hand-cut outer contours, restrained internal photographic depth, cute rounded silhouettes, and gentle deadpan humor. Keep the result flat and graphic, never a photographed sticker mockup, product catalog, or glossy 3D toy render.
+
+Sticker edge: every one of the 15 pieces has exactly one continuous white die-cut contour in one consistent absolute width across the page. White is the only outline color. No second outline, colored rim, glow, halo, layered contour, deep shadow, or multilayer edge. Use no external drop shadow.
+
+Text: permit only "SOFT FORECAST" and "STAY IN", rendered exactly. Prohibit every other word, letter, number, logo, brand, watermark, signature, speech bubble, or gibberish.
+
+Hard constraints: exactly nine main stickers and six cat-free accents; exactly one cat depiction in every main sticker; preserve the creamy-white coat, warm beige details, pink nose, and blue-gray viewer-left versus dark viewer-right eyes. No gray mask from Image 2. No extra cat, companion, duplicated face, extra limb, ordinary cat beside a prop, repeated face-window template, copied anchor inventory, copied previous-output object or layout, packaging, hands, desk scene, scissors, hard equal grid, watercolor, drawing, plush mascot, clay, anime, vector icon, glossy toy, gradient background, double border, touching pieces, or clipped contours.

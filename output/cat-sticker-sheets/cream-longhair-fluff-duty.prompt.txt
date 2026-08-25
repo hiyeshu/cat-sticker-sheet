@@ -1,0 +1,63 @@
+[INPUT]: 依赖奶油长毛猫主体图、黄色风格锚点与首轮成图的补装饰修正目标
+[OUTPUT]: 对外记录 cream-longhair-fluff-duty.png 的完整生成 Prompt 与一次修正 Prompt
+[POS]: 选中长毛猫成图的可复现运行证据，不参与 Skill 触发或规则定义
+[PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
+
+=== GENERATION PROMPT ===
+
+Use case: stylized-concept
+Asset type: one finished portrait photographic cut-paper collage die-cut sticker sheet
+
+Primary request: Create a completely new cat-specific domestic fantasy from the single cat in Image 1: exactly nine cute surreal household transformations plus exactly six theme-derived accents. This sheet must be identifiable from its silhouettes before seeing the cat and must not reuse the previous white-cat sheet's content map.
+
+Input roles: Image 1 is the only cat subject source and controls every cat trait. Image 2 is the bundled yellow style anchor only. Borrow only its photographic cut-paper collage medium, tactile material contrast, playful object scale, saturated retro color energy, dry humor, sparse accents, and single white die-cut border. Do not copy Image 2's cat, coat, eyes, exact objects, text, brands, positions, layout, inventory, or composition. The written concept below overrides Image 2.
+
+Cat genome: one fluffy long-haired cream-and-pale-peach cat; broad round face; pale cream-white muzzle, cheeks, chest, and underside; warm peach-gold crown, ears, back, and very full tail; small upright triangular ears with soft inner fluff; tiny bright pink nose and tiny pink mouth; very large glossy near-black round eyes with subtle deep brown-green reflections; long white whiskers; curious gentle upward-looking attitude. Preserve the long coat, peach-over-cream color relationship, huge dark round eyes, pink nose, soft ear shape, fluffy tail, and innocent curious expression in every visible cat. Do not import the anchor cat's gray face mask or blue eye. Exactly one depiction of this cat appears in each main sticker, exactly nine total, and no cat appears in accents.
+
+Concept seed: "Fluff Housekeeping Parade" — this long-haired cat's fur and tail keep escaping into domestic textiles as tassels, fringe, ribbon, lining, and cleaning fluff. Domestic mood: a curious craft-and-tidy afternoon. Material contrast: brushed metal and soft woven textile. Visual-joke rule: every household object accidentally recruits the cat's fluff for a different job. Palette: one flat saturated teal background #2FA7A0 with coral, mustard, cobalt, lavender, peach, mint, cream, and small wood accents. Composition: two large corner heroes connected by a loose S-shaped zigzag of supporting pieces; no central hero orbit and no three-column stack.
+
+Cross-output exclusion: do not use or resemble the prior sheet's quilted pillowcase filling, salad-bowl dome, shower cap, accordion document file, salad spinner, hot-water bottle, watering can, powder compact, measuring-cup tower, sun tag, soap bubbles, house key, quilt patch, "SOFT FORECAST", or "STAY IN". Also exclude every blacklisted object and phrase from Image 2, and exclude the failed template objects: colander, rolled bath mat, tissue-box window, dustpan caddy, cloud face cushion, enamel bowl, zipper pouch, compartment organizer, tape dispenser, paw/fish/yarn/clothespin accents.
+
+Canvas/backdrop: 3:5 portrait canvas, flat front view, one clean saturated teal background #2FA7A0 with no gradient, vignette, glow, texture, pattern, scenery, floor, or lighting variation. Arrange exactly 15 independent pieces with generous teal gutters; no piece may touch, overlap, merge, or crop.
+
+Nine imaginative household transformations:
+1. Large top-left hero — a compact section of coral gingham curtain gathers into a mint tieback rosette around the cat's full upper body; front paws rest on two curtain folds and the cat's real fluffy tail extends as the soft tassel below. Integration: threads through + becomes tassel. Visual joke: the curtain has recruited its own cat-shaped tieback.
+2. Large lower-right hero — an open mustard brushed-metal sewing tin unfolds into two staggered trays; one compact cat body nests in the deep central tray while long cream fur spills over the edges like soft thread fringe and one paw holds a loose peach ribbon. Integration: nests + spills-as-thread. Visual joke: the sewing kit contains unlimited fluff.
+3. A mint wooden clothes hanger is worn across the cat's shoulders; the long cream torso and chest fur drape beneath it like a tiny fluffy sweater, with both paws hooked over the hanger ends. Integration: wears + becomes garment. Visual joke: the sweater grew a face and tail.
+4. A lavender pleated window blind folds around the seated cat as a wide fan; ears and paws emerge between different pleats while the fluffy tail runs beside the blind cord as a second soft pull. Integration: folds between + becomes pull cord. Visual joke: one cord is unexpectedly alive.
+5. A cobalt ceramic indoor planter holds the compact cat body; the full peach tail curves upward beside two simple felt leaves as the plant's main plume, without hiding the cat's torso. Integration: nests + becomes decorative plant plume. Visual joke: this houseplant sheds fur.
+6. A clear coral-edged ribbon dispenser contains the cat's compact torso where the ribbon spool would be; the fluffy tail threads naturally through the dispenser slot as a peach ribbon curl while one paw rests on the cutter guard. Integration: replaces spool + becomes ribbon. Visual joke: every pull dispenses more tail.
+7. An open deep-blue plush eyeglasses case cradles the reclining cat; its long chest and side fur visibly become the soft cream lining, with head and two paws above the case rim. Integration: reclines + becomes lining. Visual joke: the case is far too fluffy for glasses.
+8. A butter-yellow padded ironing-board cover wraps lengthwise around the cat's torso like a soft tapered cape; the cat hugs the rounded nose of the cover with both paws while the fluffy tail escapes from the wider end. Integration: wraps + hugs. Visual joke: a wrinkle-free cat-shaped cover, with no iron present.
+9. A peach-and-mint handheld feather-duster handle is held by the standing compact cat; the cat's own huge fluffy tail arcs above and visibly becomes the duster plume, while one paw presents the handle. Integration: operates + becomes cleaning tool. Visual joke: the housekeeper is also the duster.
+
+Use at least these eight visibly different integration strategies: threads-through, becomes-tassel, nests-and-spills, wears-and-becomes-garment, folds-between, becomes-pull-cord, becomes-plant-plume, replaces-spool, becomes-lining, wraps-and-hugs, and operates/becomes-tool. No more than two centered face-only pieces. Show paws, torso, or tail in at least seven pieces.
+
+Six theme-derived accents:
+10. one small coral ribbon bow with long asymmetric tails
+11. one cluster of three oversized enamel sewing buttons in cobalt, mustard, and cream
+12. one tiny mint curtain tassel with a wooden bead
+13. one small empty wooden spool wound with peach thread
+14. exact text "FLUFF DUTY" in chunky cream uppercase hand-cut lettering
+15. exact text "BUSY LATER" in chunky mustard uppercase hand-cut lettering
+
+Style/medium: high-quality photographic cut-paper collage with believable long cat fur and tactile gingham, ribbon, pleated textile, brushed metal, glazed ceramic, clear acrylic, plush lining, padded cotton, wood, and felt. Use lively retro color blocking, slightly imperfect hand-cut outer contours, restrained internal photographic depth, cute rounded silhouettes, and gentle deadpan humor. Keep the cat photographic, not illustrated, plushified, or 3D. Every object must combine with the cat through its declared integration; no normal cat merely sitting beside a prop.
+
+Sticker edge: all 15 pieces have exactly one continuous white die-cut contour in one consistent absolute width. White is the only outline color. No second outline, colored rim, glow, halo, layered contour, deep shadow, or multilayer edge. Use no external drop shadow.
+
+Text: permit only "FLUFF DUTY" and "BUSY LATER", rendered exactly. Prohibit every other word, letter, number, logo, brand, watermark, signature, speech bubble, and gibberish.
+
+Hard constraints: exactly nine one-cat main stickers plus six cat-free accents; exactly one cat depiction in every main sticker; preserve the cream-peach longhair genome, huge near-black eyes, pink nose, and fluffy tail. No gray mask, blue eye, extra animal, duplicate face, extra limb, ordinary cat beside a prop, repeated face-window template, copied anchor or previous-sheet inventory, packaging, hands, desk mockup, scissors, hard equal grid, watercolor, drawing, plush mascot, clay, anime, vector icon, glossy toy, gradient background, double border, touching pieces, or clipped contours.
+
+=== CORRECTION PROMPT ===
+
+Use case: precise-object-edit
+Asset type: corrected finished portrait sticker sheet
+
+Image 1 is the edit target. Keep its imaginative teal-background cat sticker sheet unchanged, and make exactly one targeted addition.
+
+Add one new, small, independent accent sticker: an empty natural-wood sewing spool wound with a short length of peach thread. Place it in an available teal gutter near the existing small bow/button/tassel accents without touching or overlapping any piece. Give this spool exactly one continuous white die-cut contour matching the existing border system. The spool contains no cat, no face, no word, and no logo.
+
+After the addition, the sheet must contain exactly 15 independent pieces: the existing nine one-cat main transformations plus exactly six cat-free accents (coral bow, three-button cluster, mint tassel, new wooden thread spool, "FLUFF DUTY", and "BUSY LATER"). Preserve all nine existing cat depictions, their cream-peach long fur, huge dark eyes, pink noses, tails, poses, objects, layout, teal background, colors, materials, single white borders, and exact text spelling. Do not remove, redraw, duplicate, resize, recolor, relight, or reposition anything already present. No new cat, text, object other than the one spool, second outline, shadow, gradient, logo, or watermark.
+
+Correction result note: the renderer preserved the sheet but did not add the spool as a separately cuttable sixth accent. The selected output therefore remains 9 main + 5 independent accents.
