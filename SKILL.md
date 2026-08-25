@@ -11,8 +11,8 @@ description: >-
 ---
 
 <!--
-[INPUT]: 依赖一张清晰单猫主体图、assets/yellow-cat-collage-anchor.png 的次级媒介线索、references/ 的身份/日常错位/视觉规则、scripts/ 的校验与编译器，以及内置 image_gen 能力
-[OUTPUT]: 对外提供一张 3:5 复古摄影拼贴猫咪贴纸版、最小 sheet plan JSON、最终 Prompt 与可验证的质量结论
+[INPUT]: 依赖一张清晰单猫主体图、references/ 的身份/日常错位/视觉规则、优先使用的原生生图工具，以及仅在原生生图工具缺席时启用的 GD CLI 兜底
+[OUTPUT]: 对外提供一张 3:5 复古摄影拼贴猫咪贴纸版、实际使用的最终 Prompt 与视觉质量结论
 [POS]: cat-sticker-sheet 的单一执行入口；只保留「真实猫身份 + 普通人类道具/行为 + 一个轻微错位」所需规则，防止性格臆测、复杂世界观和过度荒诞
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
@@ -34,12 +34,12 @@ Turn one real cat into a retro-pop photographic sticker family. The cat stays re
 - Treat telephone calls, a black plastic bag used as a hood, a baseball cap, a bath towel, or drinking coffee as calibration examples, never a mandatory inventory.
 - Use deliberate low-fi photomontage, high-saturation late-1990s/early-2000s poster energy, a background treatment chosen for this sheet, and one pure-white die-cut contour around every piece.
 - Permit zero to two short labels. Quote approved text exactly and allow no other words, logos, watermarks, signatures, account names, or gibberish.
-- Use built-in image generation by default. Do not silently switch renderers.
+- Use a callable native image-generation tool whenever one is available. Use GD CLI only when the runtime exposes no native image-generation tool at all; a failed, slow, rate-limited, or unsatisfactory native call does not count as tool absence.
 
 ## Route The Request
 
-- **Generate — default:** inspect the cat, plan nine one-step concepts, validate, compile, generate, inspect, correct once if needed, and return the selected sheet plus its plan and prompt.
-- **Prompt-only:** validate and compile the same plan, but do not claim that an image was generated or inspected.
+- **Generate — default:** inspect the cat, write the final prompt, generate, inspect, correct once if needed, and return the selected sheet plus the exact prompt used.
+- **Prompt-only:** write the same final prompt, but do not claim that an image was generated or inspected.
 - **Missing source:** ask for the cat image when the request points to “this cat” but no usable image exists.
 - **Multiple cats:** ask which cat should lead when the source does not have one unambiguous subject. Never mix several cats on one sheet.
 - **Batch:** make one independent sheet per supplied single-cat image.
@@ -47,34 +47,26 @@ Turn one real cat into a retro-pop photographic sticker family. The cat stays re
 Assign every input one role:
 
 - **Subject source:** the only authority for cat identity and the only cat included in generation.
-- **Bundled anchor:** `assets/yellow-cat-collage-anchor.png`; supplies photographic collage, color energy, loose rhythm, and border treatment only.
 - **User style reference:** may supply medium, palette, or layout cues, never another subject or copied inventory.
 
 ## Load Only What Is Needed
 
 - Read `references/style-system.md` for every request.
 - Read `references/subject-identity.md` when an image is supplied.
-- Read `references/one-step-concepts.md` before planning the nine concepts.
-- Follow `references/sheet.schema.json` when writing the plan.
+- Read `references/one-step-concepts.md` before writing the nine concepts.
 - Read `references/quality-gate.md` before returning a generated result.
-
-Use the scripts instead of reproducing their rules in prose:
-
-- `scripts/validate_plan.py` validates counts, scale rhythm, uniqueness, and one-step displacement.
-- `scripts/compile_prompt.py` turns the plan into the renderer prompt.
-- `scripts/audit_sheet.py` checks the generated raster's aspect, background, piece count, spacing, and white contours.
+- Read `references/gd-cli.md` only after confirming that the runtime exposes no callable native image-generation tool. Do not load or use it while a native tool is available.
 
 Resolve bundled paths relative to this `SKILL.md`.
 
 ## Generate
 
 1. **Inspect the source.** Record one subject count and four to eight robust identity anchors. Treat unreadable or hidden traits as unknown.
-2. **Write the plan.** Use the schema: subject identity, page palette and background direction, nine ordinary action-object concepts, and six micro-stickers. Give every main sticker one `human_action`, one `object`, one `cat_interaction`, one `single_displacement`, and a natural `expression`.
-3. **Validate.** Run `python3 <skill-dir>/scripts/validate_plan.py <plan.json>`. Fix rejected fields; do not bypass the gate.
-4. **Compile.** Run `python3 <skill-dir>/scripts/compile_prompt.py <plan.json>`. Use the compiled text unchanged.
-5. **Generate from the real source.** When all inputs have local paths, pass the subject first and bundled anchor second through `referenced_image_paths`. When the subject exists only in conversation, include the smallest sufficient number of recent images and restate the written style. Never use both image-input mechanisms.
-6. **Inspect.** Run `python3 <skill-dir>/scripts/audit_sheet.py <image>`, then apply `references/quality-gate.md`. Regenerate once with one targeted correction if either gate fails.
-7. **Return honestly.** Return the selected image, plan JSON, exact compiled prompt, gate results, and one precise remaining limitation if any. Save project-bound outputs under `output/cat-sticker-sheets/`, never inside the installed Skill.
+2. **Write the final prompt.** State the identity anchors, background direction, palette, 3:5 format, 2/4/3 scale rhythm, nine distinct action-object-interaction-displacement-expression concepts, six cat-free micro-stickers, single white contour, and text boundary. Keep it backend-neutral and placeholder-free; do not create a separate plan artifact.
+3. **Choose the renderer.** Apply the native-first rule above; use `references/gd-cli.md` only for fallback.
+4. **Generate from the real source.** Pass only user-provided or task-required images, with the subject first. On the native route, use `referenced_image_paths` for local inputs or the smallest sufficient `num_last_images_to_include` for conversation-only inputs; never use both mechanisms. On the GD CLI fallback route, follow `references/gd-cli.md`. Never pass the bundled anchor to any renderer.
+5. **Inspect.** Apply `references/quality-gate.md` to the actual image. Regenerate once with one targeted correction if it fails, using the already-selected renderer only.
+6. **Return honestly.** Return the selected image, exact final prompt, visual review result, and one precise remaining limitation if any. Save project-bound outputs under `output/cat-sticker-sheets/`, never inside the installed Skill.
 
 ## Return Shape
 
@@ -83,23 +75,17 @@ Resolve bundled paths relative to this `SKILL.md`.
 
 ![Cat sticker sheet](absolute-image-path-or-rendered-image)
 
-**计划 JSON**
-
-```json
-{...}
-```
-
 **最终 Prompt**
 
 ```text
-[exact compiled prompt]
+[exact final prompt]
 ```
 
 **说明**
 
 - Mode: [Generate / Prompt-only]
 - Cat identity: [visible type + preserved anchors]
-- Gates: [plan / raster / visual — pass, fail, or not run]
+- Visual review: [pass, fail, or not run]
 - Quality: [pass, corrected once, or one precise limitation]
 ````
 

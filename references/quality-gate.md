@@ -1,23 +1,13 @@
 <!--
-[INPUT]: 依赖实际生成的 raster、通过校验的最小 sheet plan JSON，以及 scripts/audit_sheet.py 的机器判定
-[OUTPUT]: 对外提供机器闸门、九片单步错位视觉枚举、纠正规则与诚实降级规则
-[POS]: references 的最终质量门；机器检查几何，眼睛只检查身份、动作可读性和轻微荒诞是否成立
+[INPUT]: 依赖实际生成的图片、最终 Prompt 与用户猫咪主体图
+[OUTPUT]: 对外提供九片身份/动作/单错位和整页几何的视觉枚举、一次纠正规则与诚实降级规则
+[POS]: references 的最终质量门，以直接视觉检查判断身份、动作、数量、几何和轻微荒诞是否成立
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
 
 # Quality Gate
 
-## Machine Gate
-
-Run first:
-
-```bash
-python3 <skill-dir>/scripts/audit_sheet.py <image>
-```
-
-It checks the 3:5 aspect, background separation, 15 separated components, bleed, gutters, white contours, and contour-width consistency. A nonzero exit is a rejection, not a warning to ignore.
-
-## Visual Gate
+## Inspect The Image
 
 Inspect the actual image and enumerate all nine main stickers:
 
@@ -40,7 +30,7 @@ Then verify:
 
 ## Correct Once
 
-If either gate fails, regenerate once with one targeted correction. Repeat the source-cat identity, 9+6 count, 2/4/3 rhythm, affected action-object concept, one-displacement rule, background direction, and single white contour. Do not add a new concept while fixing another.
+If the image fails this review, regenerate once with one targeted correction. Repeat the source-cat identity, 9+6 count, 2/4/3 rhythm, affected action-object concept, one-displacement rule, background direction, and single white contour. Do not add a new concept while fixing another.
 
 Prioritize: wrong subject or extra cat; wrong counts or merged pieces; lost identity; unreadable action; multiple jokes in one sticker; style drift; border or text defects.
 
@@ -48,8 +38,7 @@ If the second result still fails, return the better image and name the exact rem
 
 ## Honesty
 
-- Do not claim a machine pass unless the script returned zero.
 - If visual inspection is unavailable, downgrade to prompt-only and say so.
 - Do not report eight cat faces as nine, a nearby prop as interaction, or a complex scene as one-step absurdity.
 
-For prompt-only delivery, require a passing plan, a placeholder-free compiled prompt, explicit identity anchors, nine action-object concepts, six micro-stickers, counts, background, and border constraints. State that no image was generated or visually inspected.
+For prompt-only delivery, require a placeholder-free final prompt with explicit identity anchors, nine action-object concepts, six micro-stickers, counts, background, and border constraints. State that no image was generated or visually inspected.

@@ -40,7 +40,6 @@ npx skills add https://github.com/hiyeshu/cat-sticker-sheet -g -a codex --skill 
 ```text
 SKILL.md     Skill 入口与执行流程
 agents/      Codex UI 元数据
-assets/      次级视觉媒介锚点
-references/  身份、单步错位、Schema 与质量规则
-scripts/     计划校验、Prompt 编译与成图审计
+assets/      维护者视觉校准资料，不参与生成
+references/  身份、单步错位、渲染与质量规则
 ```

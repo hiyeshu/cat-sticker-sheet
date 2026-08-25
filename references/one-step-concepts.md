@@ -15,7 +15,7 @@ ordinary human action + one familiar object + the cat performs it = gentle absur
 
 The cat is already the unusual element. Do not add several more.
 
-Plan each main sticker in this order:
+Describe each main sticker in this order:
 
 ```text
 human action → primary object → physical cat interaction → one displacement → natural expression
@@ -31,9 +31,9 @@ Use at least two modes on a sheet. Do not force every prop into the same face-wi
 
 ## One Wrong Thing
 
-Write `single_displacement` as one short sentence. It should identify the only mismatch, such as the cat replacing a human in an ordinary routine or one ordinary object being used as simple clothing.
+Write the displacement as one short sentence. It should identify the only mismatch, such as the cat replacing a human in an ordinary routine or one ordinary object being used as simple clothing.
 
-- Keep `absurdity_level` at `1` or `2`.
+- Keep the absurdity gentle.
 - Keep the object's usual name, use, and material recognizable.
 - Use one primary object. Small functional parts such as a telephone cord or cap strap belong to that object and are not extra gags.
 - If the concept requires a backstory, fictional role, compound object, rare material transformation, or two explanatory sentences, simplify it.

@@ -22,18 +22,13 @@ Inspect before writing. Record only traits that are visible or explicitly suppli
 
 Do not infer a hidden eye color, obscured marking, pedigree, sex, age, ownership fact, mood, intelligence, obedience, or personality.
 
-## Write The Plan Subject
+## Write The Prompt Identity
 
-Use only the fields required by `sheet.schema.json`:
+Write one compact identity block in the final prompt:
 
-```json
-{
-  "breed_or_type": "user-provided breed, visible type, or unknown",
-  "must_preserve": [
-    "four to eight visible recognition anchors",
-    "include eye and marking orientation when asymmetric"
-  ]
-}
+```text
+Cat identity: [user-provided breed, visible type, or unknown].
+Preserve in all nine depictions: [four to eight visible recognition anchors, including eye and marking orientation when asymmetric].
 ```
 
 The renderer receives these anchors for all nine cat depictions. Expressions live on individual sticker concepts as acting directions; they are not derived from a personality profile.

@@ -1,20 +1,19 @@
 # cat-sticker-sheet - 将单猫照片转为日常人类道具轻错位的复古摄影拼贴贴纸版
-Agent Skills spec + Markdown/YAML/JSON contracts + Python 机器闸门 + built-in image generation
+Agent Skills spec + Markdown/YAML references + built-in image generation + GD CLI fallback
 
 <directory>
 agents/ - Codex UI 元数据（1 文件: openai.yaml）
-assets/ - 生成时使用的次级视觉媒介锚点（1 文件: yellow-cat-collage-anchor.png）
-references/ - 身份、视觉样式、单步错位、Schema 与质量门（5 业务文件）
-scripts/ - 计划校验、Prompt 编译与成图审计机器闸门（3 Python 文件）
+assets/ - 仅供维护者校准 Skill 视觉规则的资料（1 文件: yellow-cat-collage-anchor.png）
+references/ - 身份、视觉样式、单步错位、视觉质量门与 GD CLI 兜底（5 业务文件）
 </directory>
 
 <config>
 SKILL.md - 仓库根入口与单 Skill 真源，可直接被 GitHub Skill 安装器发现
 README.md - 面向仓库访问者的安装、调用与目录导航，不复制执行规则
-CLAUDE.md - 项目宪法，维护根 Skill 与四个资源目录的边界
-.gitignore - 排除 macOS 元数据、Python 字节码、本地虚拟环境与运行 output
+CLAUDE.md - 项目宪法，维护根 Skill 与三个资源目录的边界
+.gitignore - 排除 macOS 元数据与运行 output
 </config>
 
-法则：仓库根就是完整 Skill，禁止再包 `skills/<name>/`。固定输出为 3:5、9 主贴纸（2 大 + 4 中 + 3 小）、6 微贴纸、写实猫脸和单层白边；背景是每页变量，不设固定默认色或绝对纯色规则。内容只用「普通人类动作 + 熟悉主道具 + 猫的可信互动 + 一个轻微错位」；猫图只提供身份，不提供性格诊断。黄色图片只提供摄影拼贴媒介、色彩能量、松散节奏与白边，不提供猫咪身份、具体道具、文字或构图。可判定契约由 scripts 裁决。
+法则：仓库根就是完整 Skill，禁止再包 `skills/<name>/`。固定输出为 3:5、9 主贴纸（2 大 + 4 中 + 3 小）、6 微贴纸、写实猫脸和单层白边；背景是每页变量，不设固定默认色或绝对纯色规则。内容只用「普通人类动作 + 熟悉主道具 + 猫的可信互动 + 一个轻微错位」；猫图只提供身份，不提供性格诊断。黄色图片仅供维护者校准摄影拼贴媒介、色彩能量、松散节奏与白边，不参与 Skill 运行，也不得传给任何渲染器。执行路径零脚本：直接写最终 Prompt，生成后按视觉质量门验收。运行环境只要暴露可调用的原生生图工具就必须使用它；只有完全没有生图工具时才允许 GD CLI 兜底。
 
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md

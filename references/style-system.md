@@ -1,5 +1,5 @@
 <!--
-[INPUT]: 依赖用户猫咪主体图与黄色拼贴锚点可复用的媒介线索，不依赖其中具体猫、道具、文字或排版
+[INPUT]: 依赖用户猫咪主体图与 SKILL.md 的固定输出契约
 [OUTPUT]: 对外提供 3:5 复古摄影拼贴贴纸版的身份、日常道具、版式、背景和单层白边视觉契约
 [POS]: references 的视觉真源；固定呈现效果，同时把内容荒诞度限制在一个日常错位
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
@@ -30,10 +30,6 @@
 ## Tone
 
 The image should be cute because a real cat is calmly occupying an ordinary human situation. Do not push the cat toward generic kawaii design, and do not push the situation toward surreal spectacle. The ideal reaction is immediate recognition followed by a small “that is not quite right.”
-
-## Secondary Anchor
-
-Use `../assets/yellow-cat-collage-anchor.png` only for photographic cutouts, color energy, loose mixed-scale rhythm, and white-border treatment. The written rules override its object inventory, cat identity, expressions, text, palette placement, and exact composition.
 
 ## Anti-style
 
