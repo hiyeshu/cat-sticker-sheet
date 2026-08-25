@@ -54,7 +54,7 @@ Installation alone is not readiness. Verify the command, version, authentication
    Log in only when needed; use `--no-browser` when a browser cannot open. Never request credentials. Keep a valid current organization; otherwise show the real organization list and let the user choose. Never guess an organization ID.
 7. Run `gd-cli tool list` and continue only if `image.generate` is available. Installation, login, organization switching, and the first paid submission are separate state changes. Explain each one and obtain confirmation before the first paid submission.
 
-If any requirement remains unmet, return the final prompt and state that no image was generated.
+If any requirement remains unmet, stop the generation workflow and report the exact blocking requirement. Do not return the internal prompt as a substitute.
 
 ## Verify the Live Contract
 
@@ -67,7 +67,7 @@ gd-cli model get vivi-image-2-0
 
 - Use `vivi-image-2-0` only. Do not select or fall back to another model.
 - Fix every request to `width: "1200"`, `height: "2000"`, `resolution: "2K"`, and `quality: "medium"`.
-- Recheck `model get vivi-image-2-0` before submission to confirm that these fields and values remain valid and to obtain the current price range and estimated duration. If the live contract no longer accepts this profile, return the final prompt and state that no image was generated.
+- Recheck `model get vivi-image-2-0` before submission to confirm that these fields and values remain valid and to obtain the current price range and estimated duration. If the live contract no longer accepts this profile, stop and report the incompatibility without returning the internal prompt.
 - Before submission, disclose the fixed model, current price range, and estimated duration.
 
 ## Build the Input

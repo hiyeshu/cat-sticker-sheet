@@ -1,6 +1,6 @@
 <!--
 [INPUT]: 依赖实际生成的图片、最终 Prompt 与用户猫咪主体图
-[OUTPUT]: 对外提供九片身份/道具互动/单错位、少量 face-in-cover 高点和整页几何的视觉枚举、一次纠正规则与诚实降级规则
+[OUTPUT]: 对外提供九片身份/道具互动/单错位、少量 face-in-cover 高点和整页几何的视觉枚举、一次纠正规则与无法验图时的停止规则
 [POS]: references 的最终质量门，以直接视觉检查判断身份、拟人日常、选择性套壳肖像、数量与几何是否成立
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
@@ -40,7 +40,5 @@ If the second result still fails, return the better image and name the exact rem
 
 ## Honesty
 
-- If visual inspection is unavailable, downgrade to prompt-only and say so.
+- If visual inspection is unavailable, stop and report that the generated image could not be verified. Do not return the internal prompt as a substitute.
 - Do not report eight cat faces as nine, a nearby prop as interaction, or a complex scene as one-step absurdity.
-
-For prompt-only delivery, require a placeholder-free final prompt with explicit identity anchors, nine object-interaction concepts, 2–3 face-in-cover accents, six micro-stickers, counts, background, and border constraints. State that no image was generated or visually inspected.
