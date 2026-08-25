@@ -6,7 +6,7 @@
 """用法:
     python3 scripts/audit_sheet.py sheet.png [--pieces 15]
 
-只判定可判定的：数量、几何、边界。笑点、基因一致性、套壳是否成立仍归视觉质检。
+只判定可判定的：数量、几何、边界。身份、动作可读性与单步错位仍归视觉质检。
 退出码 0 = 通过，1 = 拒收。
 """
 import argparse, sys

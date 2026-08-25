@@ -1,89 +1,55 @@
 <!--
-[INPUT]: 依赖实际生成的 raster、通过校验的身份/视觉性格/特殊材质 sheet plan JSON，以及 scripts/audit_sheet.py 与 scripts/validate_plan.py 的判定
-[OUTPUT]: 对外提供机器闸门与视觉闸门的分工、15 行 face-in-cover 身份/性格/材质枚举、纠正优先级与诚实降级规则
-[POS]: references 的最终质量门，把计数、几何与描边从视觉模型的自评中剥离，只把真正需要眼睛的判断留给视觉闸门
+[INPUT]: 依赖实际生成的 raster、通过校验的最小 sheet plan JSON，以及 scripts/audit_sheet.py 的机器判定
+[OUTPUT]: 对外提供机器闸门、九片单步错位视觉枚举、纠正规则与诚实降级规则
+[POS]: references 的最终质量门；机器检查几何，眼睛只检查身份、动作可读性和轻微荒诞是否成立
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
 
-# 质量门
+# Quality Gate
 
-分两道闸。**可判定的交给机器，只把需要眼睛的留给眼睛。**
+## Machine Gate
 
-## 闸门一：机器（强制，先跑）
+Run first:
 
 ```bash
-python3 <skill-dir>/scripts/audit_sheet.py <成图路径>
+python3 <skill-dir>/scripts/audit_sheet.py <image>
 ```
 
-它判定这些，无需视觉模型：画幅比是否 3:5、背景是否单一纯色（通道标准差）、连通域是否 15 片、有无出血、最小间隙、每片是否有白色外轮廓、白边宽度是否成一套系统。
+It checks the 3:5 aspect, flat background, 15 separated components, bleed, gutters, white contours, and contour-width consistency. A nonzero exit is a rejection, not a warning to ignore.
 
-退出码非 0 即**拒收**，不得进入交付。它的判据是二值的，因此在任何层次的模型上表现一致——这正是它存在的理由。
+## Visual Gate
 
-已知它能抓到而人眼与视觉模型都漏掉的三类：
+Inspect the actual image and enumerate all nine main stickers:
 
-- **片数少于 15** 几乎总是两片轮廓相接被并成一块，而不是真的少画了一片；
-- **个别片白边显著细于中位数**，通常是「彩色底板外包一圈细白边」的双层边缘，文字贴纸最常犯；
-- **背景通道标准差偏高**意味着渐变或中心辉光，交付时必须如实说明，不得称「数学纯色」。
+| # | human action × object | presentation | one visible displacement | preserved identity anchors |
+|---|---|---|---|---|
 
-## 闸门二：视觉（强制枚举，不接受判定）
+Then verify:
 
-不接受「Quality: pass」。必须逐片列出下表，全 15 行：
+- Exactly nine cat depictions, one per main sticker; the six micro-stickers contain no cat.
+- The main scale rhythm reads as 2 large / 4 medium / 3 small, with six separate micro-stickers in the gaps.
+- At least eight cat faces clearly preserve the declared coat, markings, ears, eyes, nose, and muzzle. Asymmetric eyes or markings keep the correct orientation.
+- Every human action and primary object is recognizable at a glance.
+- Every main sticker contains one understandable wrongness, not a fantasy scene, compound costume, material stunt, or pile of unrelated props.
+- Objects retain their expected material and physical behavior unless the user explicitly requested otherwise.
+- Expressions remain natural acting cues and do not turn the cat into nine unrelated cartoon personalities.
+- Worn items fit the head; operated items show only necessary paws; face openings appear only on objects that naturally form covers.
+- The result remains photographic low-fi collage, not 3D toy art, anime, chibi, plush, watercolor, or smooth vector illustration.
+- All fifteen pieces have one white contour, remain separated, and sit on one flat solid background.
+- Zero to two approved labels are spelled exactly; no extra words, logos, watermarks, signatures, account names, or gibberish appear.
 
-| # | 外壳 × 特殊材质 | 机制与荒诞落点 | 表情 | 脸部开口与受力 | 保留下来的身份锚点 |
-|---|---|---|---|---|---|
+## Correct Once
 
-**强制枚举的作用是强迫真的去看。**能力越弱的模型，从「判断」改成「列举」的收益越大。
+If either gate fails, regenerate once with one targeted correction. Repeat the source-cat identity, 9+6 count, 2/4/3 rhythm, affected action-object concept, one-displacement rule, flat background, and single white contour. Do not add a new concept while fixing another.
 
-列完后核对这些：
+Prioritize: wrong subject or extra cat; wrong counts or merged pieces; lost identity; unreadable action; multiple jokes in one sticker; style drift; border or text defects.
 
-- 全页恰好九个猫脸，每片一处，微贴纸零处；每张脸都居于一个夸张外壳的干净开口中央，外壳遮住或替代身体。漂移成全身场景、自由道具场景或一片内两张脸即失败。
-- 主贴纸尺度节奏确实是 2 大 / 4 中 / 3 小；六枚独立微贴纸位于间隙，不与主贴纸相接。
-- 至少八片清楚保留了声明的毛色、面罩关系、耳型、眼色、鼻与决定性斑纹。若声明了异色瞳或不对称斑纹，正面视角下左右朝向必须正确。
-- 用户提供品种时九片都保留其可见品种特征；未提供时不得凭空声明血统。
-- 九张表情至少能列出五种差异，但仍属于同一 `visual_persona`；把乖巧猫画成通用狡猾脸、把机灵猫画成九张空洞萌脸均失败。
-- 每片的 `displaces` 在图上真的成立——位置、角色或常规材质预期确实被打破，不是随手把道具贴在猫脸旁边。
-- 特殊材质必须靠厚度、纹理、折痕、压缩、反光、透明或重力行为被识别；只把普通帽子改成奇怪颜色不算材质变化。
-- `wearable_fit` 在图上成立：开口、耳洞、绑带、压痕、折叠或平衡点与猫头形状一致，且不遮没关键身份锚点。
-- 九种外壳关系在缩略图尺度上可区分，同时都清楚保留 face-in-cover 骨架。整页读起来是同一种构造重复九次，或裂成九种无关场景，均失败。
-- 六枚装饰确实是主贴纸的余波，能指认它来自哪一片。
-- 医学上仍是这只猫：无多余动物、同伴、人、吉祥物、重复头部、多余四肢。
-- 确实是写实照片拼贴：手绘、水彩、绒毛玩偶、黏土、光泽 3D、动漫或矢量图标漂移即失败。
-- 零到两条文字，逐字符核对拼写。多余字词、乱码、logo、签名、水印即失败。
-- 色彩是高饱和撞色，不是发灰的浑色。
+If the second result still fails, return the better image and name the exact remaining defect.
 
-## 纠正规则
+## Honesty
 
-任一闸门失败，带**一处**定向修正重生成一次。重生成时完整复述：猫咪身份、视觉性格、face-in-cover 骨架、2/4/3 + 6 计数、每片一猫脸、外壳机制、材质行为、精确文字、单层白边与间隙约束。
+- Do not claim a machine pass unless the script returned zero.
+- If visual inspection is unavailable, downgrade to prompt-only and say so.
+- Do not report eight cat faces as nine, a nearby prop as interaction, a complex scene as one-step absurdity, or a tonal background as mathematically flat.
 
-优先级：
-
-1. 产物错误或主体来源缺失；
-2. 多余的猫、重复的脸、猫数不对；
-3. 相接、重叠或出血（机器闸门已定位到 bbox）；
-4. 基因丢失、异色瞳或决定性斑纹丢失；
-5. 9+6 数量不对；
-6. 视觉性格丢失或九张表情变成同一张脸；
-7. 特殊材质不可读、穿戴受力不成立，或 `displaces` 没有形成荒诞落点；
-8. 机制坍缩成同一种构造；
-9. 与 ledger 撞档；
-10. 手绘、绒毛、动漫或光泽 3D 漂移；
-11. 双层边缘、光晕或投影；
-12. 拼写错误或未授权文字；
-13. 装饰不成立、配色或背景不纯。
-
-第二次仍不通过，返回较好的一张并**精确指名**残留缺陷。
-
-## 诚实规则
-
-- 未跑机器闸门，不得声称通过。
-- 环境不具备视觉检查能力时，**降级为 Prompt-only 并明确声明未做视觉验收**，不得硬着头皮报 pass。
-- 绝不把八个猫头说成九个、把旁边的道具说成穿戴、把普通改色说成特殊材质、把双层边说成单层、把有色调起伏的背景说成精确纯色。
-
-模型层次下降时，成图质量是缓慢下降的，报告可信度是断崖式的。**这一节防的是后者。**
-
-## Prompt-only 检查
-
-- 计划已通过 `validate_plan.py`；
-- 编译产物无未替换占位符、无外部专名；
-- 身份基因、视觉性格、固定 face-in-cover 骨架、九个外壳、特殊材质、六枚微贴纸、文字、背景、边框、计数、间隙均已显式写出；
-- 回复中不声称已生成或已做视觉检查。
+For prompt-only delivery, require a passing plan, a placeholder-free compiled prompt, explicit identity anchors, nine action-object concepts, six micro-stickers, counts, background, and border constraints. State that no image was generated or visually inspected.

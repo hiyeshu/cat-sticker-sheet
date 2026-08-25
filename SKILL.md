@@ -2,138 +2,107 @@
 name: cat-sticker-sheet
 description: >-
   Turn one supplied cat photo or clear cat illustration into a finished 3:5
-  retro-pop low-fi photomontage sticker sheet with nine face-in-cover cat
-  portraits, absurd oversized shells made from unexpected tactile materials,
-  and six micro-stickers. Use when the user asks for a cat sticker sheet, pet
-  sticker pack, 猫头贴纸, 猫咪表情贴纸, 荒诞穿戴猫, 特殊材质猫贴纸, 写实拼贴猫贴纸,
-  or a prompt-only recipe for that look. Preserve visible breed/type and
-  identity anchors, infer a distinct visual persona for this cat, and vary
-  expressions without turning it into a generic cute mascot.
+  retro-pop photographic collage sticker sheet with nine face-led cat stickers
+  performing ordinary human actions with familiar props, plus six micro-stickers.
+  Use for 猫头贴纸, 猫咪表情贴纸, pet sticker sheets, lightly absurd anthropomorphic
+  cat stickers, or a prompt-only recipe for this look. Preserve visible breed/type
+  and identity anchors; create cuteness through one simple everyday displacement
+  per sticker without inferring the cat's personality or inventing fantasy lore.
 ---
 
 <!--
-[INPUT]: 依赖一张清晰单猫主体图、assets/yellow-cat-collage-anchor.png、references/ 下的身份/视觉性格/材质变化规则、scripts/ 下的校验与编译器，以及内置 image_gen 能力
-[OUTPUT]: 对外提供一张 3:5 复古流行 face-in-cover 猫咪贴纸版、sheet plan JSON、编译产出的最终 Prompt、猫咪身份与视觉性格，以及两道闸门的验收结论
-[POS]: cat-sticker-sheet 的请求路由与主执行流程，把可判定的表情/材质/版式契约交给机器闸门，把每猫变量嵌回固定 cover-collage 骨架，阻止通用萌猫化、自由场景漂移和参考图照抄
+[INPUT]: 依赖一张清晰单猫主体图、assets/yellow-cat-collage-anchor.png 的次级媒介线索、references/ 的身份/日常错位/视觉规则、scripts/ 的校验与编译器，以及内置 image_gen 能力
+[OUTPUT]: 对外提供一张 3:5 复古摄影拼贴猫咪贴纸版、最小 sheet plan JSON、最终 Prompt 与可验证的质量结论
+[POS]: cat-sticker-sheet 的单一执行入口；只保留「真实猫身份 + 普通人类道具/行为 + 一个轻微错位」所需规则，防止性格臆测、复杂世界观和过度荒诞
 [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 -->
 
 # Cat Sticker Sheet
 
-Turn one cat source into a cohesive retro-pop cover-collage family: the same recognizable photographic cat face appears once in the clean opening of each of nine absurd oversized cover shells, while six tiny micro-stickers finish the page. Return one complete sheet plus the exact production prompt unless the user explicitly asks for prompt-only output.
+Turn one real cat into a retro-pop photographic sticker family. The cat stays recognizable; ordinary human props and routines create the joke.
 
-## Hold The Product Contract
+## Hold The Contract
 
-- Produce one flat 3:5 portrait raster, not separate PNGs, packaging, a photographed mockup, or a cutting-file claim.
-- Default to exactly **9 main cat stickers + 6 accents**. Count cat depictions independently from accent pieces.
-- Arrange the nine main stickers as exactly **2 large heroes + 4 medium + 3 small**, with six independent micro-stickers in the gaps.
-- Place exactly one face depiction of the source cat in each main sticker and exactly nine cat faces on the sheet. Center each face in one clean opening of an oversized cover shell; the shell hides or replaces the body. Keep the crop to face, ears, limited front paws, or a minimal fur edge; never add a companion, mirrored second face, cloned head, kitten, human, mascot, or full-body scene.
-- Preserve a recognition-oriented cat genome: user-provided breed or visible type, coat base, face mask or markings, ear silhouette, nose/muzzle, eye colors and their orientation, and distinctive marks. Keep the cat photographic; do not guess pedigree or promise biometric identity.
-- Infer one **visual persona** from visible eyelid, gaze, mouth, ear and head-posture cues. Treat it as character direction, not a claim about real temperament. Define compatible and incompatible expressions so a cute, goofy, gentle, clever, aloof, sleepy, or other-looking cat keeps its own flavor.
-- Make every familiar object become the cover shell around the cat's head, ears or limited front paws. It may wrap, frame, reshape, reveal, contain, or be operated, but the visible result must still read as one centered photographic face inside one oversized object-costume. A loose prop pasted beside the face is a failure.
-- Build absurdity from **familiar object × unexpected material × cat-specific fit × persona-consistent expression**. The material must show believable thickness, texture, folds, reflection, transparency, compression, or weight.
-- Answer one question for every piece: **which normal position, role, or material expectation was displaced?** This is the `displaces` field and it is non-negotiable.
-- Allocate the nine pieces across **nine distinct shell-integration mechanisms in a bijection**; these mechanisms vary the outer construction, load path and visual joke without changing the face-in-cover skeleton. `face_window` names the one piece whose opening itself is the main joke. Nine copies of the same shell construction are a failure even when the objects differ.
-- Derive object, material, and expression choices partly from **this cat's own genome and visual persona** (`generative_cue`). At least three concepts must stop working if the cat were swapped; at least six must explain their `persona_fit`.
-- Treat user examples such as fruit-peel headwear, towels, baseball, or coffee as seed directions only. Invent a new inventory for each run; never turn examples into a mandatory checklist.
-- Keep the cross-output runtime ledger in the active project at `output/cat-sticker-sheets/ledger.json`. `validate_plan.py` always merges the bundled read-only `references/anchor-exclusions.json` seed, then adds project history when present. Never write generated output back into the installed Skill.
-- Use the fixed grammar in `references/style-system.md`: deliberate low-fi photomontage, realistic cat fur, tactile shell materials, high-saturation late-1990s/early-2000s pop-poster energy, very light halftone or photocopy grain on shells only, deadpan humor, and slightly handmade cut-paper contours.
-- Use one continuous white die-cut contour only. Never add a second colored outline, outer glow, layered rim, halo, or thick drop shadow.
-- Default to a perfectly flat saturated cerulean-blue background near `#279DDA`. Treat background color as a page-level variable: honor an explicit user color, but keep it one clean solid treatment with no scenery or texture.
-- Allow zero to two short decorative English labels. Quote every permitted label exactly in the prompt, inspect its spelling, and prohibit all other text and logos.
-- Use the built-in image-generation path by default. Do not silently switch to a CLI or external renderer.
+- Produce one flat 3:5 portrait sheet: exactly **9 main stickers + 6 micro-stickers**.
+- Arrange the main stickers as **2 large + 4 medium + 3 small** with six separated micro-stickers in the gaps.
+- Show the same source cat exactly once in every main sticker and nowhere in the micro-stickers. Keep the face photographic and the body hidden or minimally cropped.
+- Preserve visible breed/type, coat relationships, face markings, ear silhouette, eye colors and orientation, nose, muzzle, and distinctive marks. Never guess pedigree or promise biometric identity.
+- Do not infer whether the cat is cute, goofy, obedient, clever, aloof, or any other personality. Expressions are temporary acting directions, not character diagnosis.
+- Build each main sticker from one recognizable human action, one familiar primary object, and one simple displacement. If the joke needs more than one sentence to explain, simplify it.
+- Keep the object recognizable, normally constructed, and materially believable. Do not add an unexpected material, second prop, fantasy role, or secondary gag unless the user explicitly asks.
+- Let the prop be worn, held, or operated. Use a clean face opening only when the object naturally forms a hood, cover, bag, towel, or shell; do not force telephones, cups, or handheld tools into face windows.
+- Treat telephone calls, a black plastic bag used as a hood, a baseball cap, a bath towel, or drinking coffee as calibration examples, never a mandatory inventory.
+- Use deliberate low-fi photomontage, high-saturation late-1990s/early-2000s poster energy, a perfectly flat solid background, and one pure-white die-cut contour around every piece.
+- Permit zero to two short labels. Quote approved text exactly and allow no other words, logos, watermarks, signatures, account names, or gibberish.
+- Use built-in image generation by default. Do not silently switch renderers.
 
 ## Route The Request
 
-- **Generate — default:** inspect the cat, write its identity genome and visual persona, plan new cat-head concepts and material mismatches, compile the prompt, generate, inspect, correct once if needed, and return the selected sheet plus prompt.
-- **Prompt-only:** when the user explicitly asks for a prompt without generation, return the complete bracket-free prompt, genome, and recipe. Do not claim an image was generated or inspected.
-- **Missing input:** when the user says “这只猫” or equivalent but no usable image is available, ask for the cat image instead of inventing its appearance.
-- **Multiple cats:** when more than one cat is prominent and the user has not named the hero, ask one focused question. Do not arbitrarily select one and never convert a single-cat request into duo or group stickers.
-- **Independent-cat batch:** when the user supplies several separate single-cat images, make one sheet per cat. Give every sheet a different concept seed and maintain one exclusion ledger across the batch; never mix the cats on one page.
+- **Generate — default:** inspect the cat, plan nine one-step concepts, validate, compile, generate, inspect, correct once if needed, and return the selected sheet plus its plan and prompt.
+- **Prompt-only:** validate and compile the same plan, but do not claim that an image was generated or inspected.
+- **Missing source:** ask for the cat image when the request points to “this cat” but no usable image exists.
+- **Multiple cats:** ask which cat should lead when the source does not have one unambiguous subject. Never mix several cats on one sheet.
+- **Batch:** make one independent sheet per supplied single-cat image.
 
-Assign each supplied image one role:
+Assign every input one role:
 
-- **Subject source:** supplies the only cat that may appear; include it in generation.
-- **Bundled style anchor:** `assets/yellow-cat-collage-anchor.png`; supplies collage medium, physical absurdity, border treatment, color energy, and loose page rhythm only.
-- **User style reference:** may supply one additional medium, palette, or layout cue; never copy its cat, text, watermark, inventory, or exact composition.
-- **Supporting motif:** may supply one user-approved object or pattern, never another character.
+- **Subject source:** the only authority for cat identity and the only cat included in generation.
+- **Bundled anchor:** `assets/yellow-cat-collage-anchor.png`; supplies photographic collage, color energy, loose rhythm, and border treatment only.
+- **User style reference:** may supply medium, palette, or layout cues, never another subject or copied inventory.
 
-The subject source always overrides every cat trait visible in a style reference.
-
-## Load The References
+## Load Only What Is Needed
 
 - Read `references/style-system.md` for every request.
-- Read `references/subject-genome.md` whenever an image is supplied.
-- Read `references/shell-variation.md` before planning the nine cat-head concepts, special materials, expressions, and six accents.
-- Read `references/prompt-compiler.md` and `references/sheet.schema.json` before writing a plan or returning a prompt.
+- Read `references/subject-identity.md` when an image is supplied.
+- Read `references/one-step-concepts.md` before planning the nine concepts.
+- Follow `references/sheet.schema.json` when writing the plan.
 - Read `references/quality-gate.md` before returning a generated result.
 
-Three scripts carry the checks that must not depend on model tier:
+Use the scripts instead of reproducing their rules in prose:
 
-- `scripts/validate_plan.py` — structural gate on the plan JSON; runs without vision, without a renderer.
-- `scripts/compile_prompt.py` — plan JSON to renderer prompt; every fixed contract lives here as a constant.
-- `scripts/audit_sheet.py` — raster gate: aspect, background solidity, piece count, bleed, gutter, single white contour.
+- `scripts/validate_plan.py` validates counts, scale rhythm, uniqueness, and one-step displacement.
+- `scripts/compile_prompt.py` turns the plan into the renderer prompt.
+- `scripts/audit_sheet.py` checks the generated raster's aspect, background, piece count, spacing, and white contours.
 
-Run them. Do not reimplement their judgements in prose, and do not report a pass they did not give.
-Resolve every bundled path relative to the directory containing this `SKILL.md`, never relative to the user's active-project working directory.
+Resolve bundled paths relative to this `SKILL.md`.
 
-## Generate The Sheet
+## Generate
 
-1. **Inspect every input.** View each usable image before describing it. Record dimensions, role, subject count, robust cat anchors, source palette, visible objects, and every mark classified as intentional label, incidental text, signature, watermark, or UI. Do not guess unreadable traits.
-2. **Write identity and visual persona.** Follow `references/subject-genome.md`. Record observed anchors separately from the inferred visual persona; write its expression language and avoid list; derive one `generative_cue` that drives object, material, or expression choice. If breed is user-provided, preserve its visible markers; otherwise write `unknown`. Lock heterochromia and asymmetric-marking orientation explicitly.
-3. **Write the sheet plan JSON.** Follow `references/shell-variation.md` and `references/sheet.schema.json`: one seed, page system, nine mechanism-slotted face-in-cover pieces in a 2/4/3 scale rhythm, at least five expressions, at least four material classes, at least two high-absurdity pieces, a filled `displaces`/`wearable_fit`/`persona_fit` for every piece, and six accents of which at least four are residues. Use saturated cerulean blue near `#279DDA` by default; in a batch, vary page systems unless the user locks them.
-4. **Gate the plan.** Run `python3 <skill-dir>/scripts/validate_plan.py <plan.json> --ledger <active-project>/output/cat-sticker-sheets/ledger.json`. A missing project ledger is valid: the validator still loads `references/anchor-exclusions.json`. On rejection, fix the plan — never bypass the gate.
-5. **Compile the prompt.** Run `python3 <skill-dir>/scripts/compile_prompt.py <plan.json>`. Do not hand-write renderer prompts or add named external references or ad-hoc negative lists to its output.
-6. **Generate with the actual source.** Use built-in image generation. When every required image has a local path, pass the subject source first and the bundled yellow anchor second through `referenced_image_paths`; append any user style reference after them. When the subject exists only in conversation, use the smallest `num_last_images_to_include` that contains it and restate the complete written style grammar; never drop the subject merely to include the bundled anchor. Never use both image-input mechanisms.
-7. **Gate the raster.** Run `python3 <skill-dir>/scripts/audit_sheet.py <image>` first; on pass, apply the vision gate in `references/quality-gate.md` — enumerate all fifteen rows, including identity anchors, expression, material behavior, and wearable fit. If either gate fails, regenerate once with one targeted correction while repeating the full cat identity, visual persona, counts, border, text, source-role, and anchor-boundary constraints.
-8. **Persist and return.** For project-bound work, write the selected output and runtime ledger under the active project's `output/cat-sticker-sheets/`, never inside the installed Skill. Append the accepted plan with `python3 <skill-dir>/scripts/validate_plan.py <plan.json> --ledger <active-project>/output/cat-sticker-sheets/ledger.json --append`. For preview-only work, render inline. Return the selected image, plan JSON, compiled prompt, and any remaining limitation.
+1. **Inspect the source.** Record one subject count and four to eight robust identity anchors. Treat unreadable or hidden traits as unknown.
+2. **Write the plan.** Use the schema: subject identity, page colors, nine ordinary action-object concepts, and six micro-stickers. Give every main sticker one `human_action`, one `object`, one `cat_interaction`, one `single_displacement`, and a natural `expression`.
+3. **Validate.** Run `python3 <skill-dir>/scripts/validate_plan.py <plan.json>`. Fix rejected fields; do not bypass the gate.
+4. **Compile.** Run `python3 <skill-dir>/scripts/compile_prompt.py <plan.json>`. Use the compiled text unchanged.
+5. **Generate from the real source.** When all inputs have local paths, pass the subject first and bundled anchor second through `referenced_image_paths`. When the subject exists only in conversation, include the smallest sufficient number of recent images and restate the written style. Never use both image-input mechanisms.
+6. **Inspect.** Run `python3 <skill-dir>/scripts/audit_sheet.py <image>`, then apply `references/quality-gate.md`. Regenerate once with one targeted correction if either gate fails.
+7. **Return honestly.** Return the selected image, plan JSON, exact compiled prompt, gate results, and one precise remaining limitation if any. Save project-bound outputs under `output/cat-sticker-sheets/`, never inside the installed Skill.
 
-## Respect The Secondary Anchor Boundary
-
-Borrow only:
-
-- realistic cat-face cutouts centered in oversized cover shells;
-- tactile material contrast, high-saturation retro color blocking, and loose poster energy;
-- deadpan emotional tone, loose mixed-scale layout, one white contour, and sparse accent stickers.
-
-Do not copy:
-
-- the anchor cat's gray-mask/cream-coat traits when the user's cat differs;
-- its objects, material pairings, phrases, and accent set — this inventory lives only in `references/anchor-exclusions.json`, so `validate_plan.py` rejects it without shipping generated output or maintaining a prose blacklist;
-- its exact sticker positions, palette mapping, yellow lighting, logos, or composition.
-
-Keep the renderer prompt self-contained and original. Do not insert source names, source wording, logos, watermarks, signatures, or recognizably copied costumes.
-
-## Renderer Boundary
-
-- Keep the compiled prompt backend-neutral; use built-in image generation for execution.
-- If built-in generation is unavailable, return the compiled prompt and state that no image was generated.
-- If Python is unavailable, transcribe the compiler's field order by hand, self-check every validator judgement, and say the result is machine-unverified. If vision inspection is unavailable, downgrade to prompt-only honestly.
-- Add a CLI route only after the user explicitly requests and authorizes that renderer and its requirements.
-
-## Return This Shape
+## Return Shape
 
 ````markdown
 **猫咪贴纸排版图**
 
 ![Cat sticker sheet](absolute-image-path-or-rendered-image)
 
+**计划 JSON**
+
+```json
+{...}
+```
+
 **最终 Prompt**
 
 ```text
-[the exact prompt used]
+[exact compiled prompt]
 ```
 
 **说明**
 
 - Mode: [Generate / Prompt-only]
-- Cat identity: [breed or visible type + observed recognition anchors]
-- Visual persona: [primary + expression language + avoid list + generative_cue]
-- Plan: [sheet_id / seed / nine expression-object-material-mechanism combinations with their displaced expectation]
-- Gates: [validate_plan ✓/✗, audit_sheet ✓/✗, vision enumeration ✓/✗ — or "not run" stated honestly]
-- Quality: [pass, regenerated once, or one precise remaining limitation]
+- Cat identity: [visible type + preserved anchors]
+- Gates: [plan / raster / visual — pass, fail, or not run]
+- Quality: [pass, corrected once, or one precise limitation]
 ````
 
 ## Non-negotiable Outcome
 
-A successful result reads instantly as one coherent cat-specific retro cover-collage and one flat sticker sheet: nine genuinely different oversized shells, each with exactly one recognizable photographic source-cat face centered in a clean opening; expressions that belong to this cat; unexpected materials that look physically real; a clear 2-large/4-medium/3-small rhythm; six causal micro-stickers; one white border layer; lively color; no copied examples or prior inventory; no extra cats; and no mockup or 3D-toy drift.
+The result must read in one glance: the same real cat, nine ordinary human situations, one gentle wrongness per situation, six small accents, and one cohesive flat sticker sheet. The cat-object mismatch creates the cuteness; complexity does not.

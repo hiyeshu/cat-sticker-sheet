@@ -1,96 +1,90 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "title": "cat-sticker-sheet / sheet plan",
-  "_protocol": "[INPUT]: 依赖 subject-genome.md 的猫咪身份与视觉性格、shell-variation.md 的外壳关系槽位分配，以及 style-system.md 的固定 face-in-cover 9+6 契约; [OUTPUT]: 对外提供一页贴纸的唯一真源 JSON，被 compile_prompt.py、validate_plan.py 与项目运行 ledger 共同消费; [POS]: references 的内容契约层，把每猫性格、每片外壳表情与材质错位从固定渲染语法中分离出来; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
-  "description": "只描述这一页【是什么】。不变的产物契约在 compile_prompt.py；排除项在 anchor-exclusions.json 与项目 ledger；IP 边界只留在 SKILL.md，三者都不进本文件。",
+  "title": "cat-sticker-sheet plan",
+  "_protocol": "[INPUT]: 依赖 subject-identity.md 的身份锚点、one-step-concepts.md 的单步错位和 style-system.md 的 9+6 契约; [OUTPUT]: 对外提供一页贴纸的最小内容 JSON，被 validate_plan.py 与 compile_prompt.py 消费; [POS]: references 的内容契约层，只保存实现画面所需变量; [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md",
   "type": "object",
-  "required": ["sheet_id", "seed", "subject", "page", "pieces", "accents"],
+  "required": ["subject", "page", "pieces", "accents"],
   "additionalProperties": false,
   "properties": {
-    "sheet_id": { "type": "string", "minLength": 1 },
-    "seed": { "type": "string", "minLength": 1, "description": "内部主题，永不渲染成文字" },
-    "freeform": { "type": "boolean", "default": false, "description": "逃生舱：放开机制双射与尺度配额；displaces 永不豁免" },
-
     "subject": {
       "type": "object",
-      "required": ["breed_or_type", "must_preserve", "visual_persona", "generative_cue"],
+      "required": ["breed_or_type", "must_preserve"],
       "additionalProperties": false,
       "properties": {
-        "breed_or_type": { "type": "string", "minLength": 1,
-                            "description": "用户已知的品种，或仅按可见证据描述的猫咪类型；证据不足时写 unknown，不猜血统" },
-        "must_preserve": { "type": "array", "minItems": 4, "maxItems": 8, "items": { "type": "string", "minLength": 1 },
-                           "description": "逐字粘进 prompt 的识别锚点" },
-        "visual_persona": {
-          "type": "object",
-          "required": ["primary", "secondary", "energy_level", "expression_language", "avoid_expressions"],
-          "additionalProperties": false,
-          "properties": {
-            "primary": { "type": "string", "minLength": 1,
-                         "description": "从照片外观推断的主视觉气质，不宣称真实个性" },
-            "secondary": { "type": "array", "minItems": 1, "maxItems": 3,
-                           "items": { "type": "string", "minLength": 1 } },
-            "energy_level": { "enum": ["low", "medium", "high"] },
-            "expression_language": { "type": "array", "minItems": 3, "maxItems": 6,
-                                     "items": { "type": "string", "minLength": 1 } },
-            "avoid_expressions": { "type": "array", "minItems": 1, "maxItems": 4,
-                                   "items": { "type": "string", "minLength": 1 } }
-          }
+        "breed_or_type": {
+          "type": "string",
+          "minLength": 1
         },
-        "generative_cue": { "type": "string", "minLength": 1,
-                            "description": "基因与视觉性格当燃料：这只猫的哪个特征驱动物件、表情或材质选择。换只猫就不成立" }
+        "must_preserve": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 8,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
       }
     },
-
     "page": {
       "type": "object",
-      "required": ["background", "palette", "layout", "mood", "text"],
+      "required": ["background", "palette", "text"],
       "additionalProperties": false,
       "properties": {
-        "background": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
-        "palette": { "type": "array", "minItems": 4, "maxItems": 6, "items": { "type": "string" } },
-        "layout": { "type": "string", "minLength": 1 },
-        "mood": { "type": "string", "minLength": 1 },
-        "text": { "type": "array", "maxItems": 2, "items": { "type": "string", "minLength": 1 } }
+        "background": {
+          "type": "string",
+          "pattern": "^#[0-9A-Fa-f]{6}$"
+        },
+        "palette": {
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 6,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "text": {
+          "type": "array",
+          "maxItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
       }
     },
-
     "pieces": {
-      "type": "array", "minItems": 9, "maxItems": 9,
+      "type": "array",
+      "minItems": 9,
+      "maxItems": 9,
       "items": {
         "type": "object",
-        "required": ["n", "scale", "mechanism", "displaces", "object", "material", "material_class",
-                     "material_behavior", "domain", "crop", "color", "expression", "persona_fit",
-                     "wearable_fit", "absurdity"],
+        "required": [
+          "n",
+          "scale",
+          "presentation",
+          "human_action",
+          "object",
+          "cat_interaction",
+          "single_displacement",
+          "expression",
+          "color",
+          "absurdity_level"
+        ],
         "additionalProperties": false,
         "properties": {
           "n": { "type": "integer", "minimum": 1, "maximum": 9 },
           "scale": { "enum": ["hero", "medium", "small"] },
-          "mechanism": { "enum": ["becomes_part", "replaces_silhouette", "wraps", "wears", "operates",
-                                  "spills_from", "peeks_through", "nests", "face_window"] },
-          "displaces": { "type": "string", "minLength": 1,
-                         "description": "指出被猫或特殊材质打破的正常位置、角色或材料预期；填不出来 = 没有视觉笑点" },
-          "object": { "type": "string", "minLength": 1 },
-          "material": { "type": "string", "minLength": 1 },
-          "material_class": { "enum": ["food", "textile", "paper", "packaging", "transparent",
-                                        "reflective", "rigid", "organic", "mixed"] },
-          "material_behavior": { "type": "string", "minLength": 1,
-                                 "description": "可见的厚度、纹理、折痕、反光、透明或软硬行为，禁止只写材质名" },
-          "domain": { "enum": ["food", "drink", "bath", "sport", "fashion", "packaging", "desk",
-                               "home", "travel", "nature", "industrial", "toy"] },
-          "crop": { "enum": ["face", "face_ears", "face_paws", "head_shoulders"] },
-          "color": { "type": "string", "minLength": 1 },
-          "expression": { "type": "string", "minLength": 1 },
-          "persona_fit": { "type": "string", "minLength": 1,
-                           "description": "说明这张表情与情境为什么属于这只猫，而非任意猫" },
-          "wearable_fit": { "type": "string", "minLength": 1,
-                            "description": "说明外壳开口与边缘如何顺着猫头、耳朵或前爪真实穿戴与受力" },
-          "absurdity": { "enum": ["low", "medium", "high"] }
+          "presentation": { "enum": ["wears", "operates", "face_in_cover"] },
+          "human_action": { "type": "string", "minLength": 1, "maxLength": 120 },
+          "object": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "cat_interaction": { "type": "string", "minLength": 1, "maxLength": 160 },
+          "single_displacement": { "type": "string", "minLength": 1, "maxLength": 160 },
+          "expression": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "color": { "type": "string", "minLength": 1, "maxLength": 80 },
+          "absurdity_level": { "type": "integer", "enum": [1, 2] }
         }
       }
     },
-
     "accents": {
-      "type": "array", "minItems": 6, "maxItems": 6,
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
       "items": {
         "type": "object",
         "required": ["id"],
@@ -98,10 +92,12 @@
         "properties": {
           "id": { "type": "string", "minLength": 1 },
           "motif": { "type": "string", "minLength": 1 },
-          "residue_of": { "type": "integer", "minimum": 1, "maximum": 9,
-                          "description": "这枚装饰是第几号主贴纸留下的因果余波" },
           "text": { "type": "string", "minLength": 1 }
-        }
+        },
+        "oneOf": [
+          { "required": ["motif"] },
+          { "required": ["text"] }
+        ]
       }
     }
   }

@@ -1,8 +1,8 @@
-# [INPUT]: 依赖 SKILL.md 的名称、face-in-cover 骨架、猫咪身份/视觉性格/特殊材质触发范围和默认交付契约
+# [INPUT]: 依赖 SKILL.md 的普通人类道具/行为、单步错位与身份保真契约
 # [OUTPUT]: 对 Codex UI 提供 Skill 显示名、短说明和默认调用提示
 # [POS]: cat-sticker-sheet 的产品界面元数据，不承载视觉或执行规则
 # [PROTOCOL]: 变更时更新此头部，然后检查 CLAUDE.md
 interface:
   display_name: "Cat Sticker Sheet"
-  short_description: "Create retro face-in-cover cat sticker sheets"
-  default_prompt: "Use $cat-sticker-sheet to preserve this cat's identity and visual persona in a retro-pop cover collage: nine photographic cat faces centered in absurd oversized shells made from unexpected tactile materials, plus six micro-stickers."
+  short_description: "Create gently absurd human-prop cat sticker sheets"
+  default_prompt: "Use $cat-sticker-sheet to preserve this cat's identity in a retro photo-collage sheet where it performs ordinary human actions with one gentle visual displacement per sticker."
