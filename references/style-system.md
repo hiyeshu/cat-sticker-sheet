@@ -23,9 +23,9 @@
 - Deliberate low-fi photomontage: realistic cat fur and eyes, recognizable real-world props, and slightly handmade cut-paper edges.
 - High-saturation late-1990s/early-2000s pop-poster energy with simple flat printed highlights.
 - Make the face-in-cover accents obvious and graphic, with a bold readable silhouette and the presence of a near-surreal portrait. Keep the other pieces grounded in ordinary prop interaction so these accents remain punctuation rather than a new template.
-- Very light halftone or photocopy grain may appear on props, optional typography, or the background, never over the cat face.
+- Very light halftone or photocopy grain may appear on props or optional typography, never over the cat face or background.
 - Keep each object in its familiar material. Show ordinary fabric folds, plastic crinkles, ceramic surfaces, paper edges, metal reflections, or cable weight accurately.
-- Choose the background treatment for each sheet from its cat, props, and palette. Flat color, gentle gradients, subtle paper or print texture, soft glow, light falloff, and sparse low-contrast graphic motifs are all valid when they strengthen the cute effect, preserve clear gutters, and maintain visible contrast with the white contours.
+- Use one perfectly flat sky-blue background near `#279DDA` by default. Honor an explicit user color exactly. Allow no scenery, gradient, vignette, glow, grain, texture, graphic motif, or lighting falloff.
 - Give all fifteen pieces one continuous pure-white die-cut contour of the same absolute width, about 2% of canvas width. No second rim, colored outline, halo, bevel, or shadow.
 - Keep every piece fully separated with visible background gutter. Nothing overlaps, touches, merges, or clips.
 - Permit zero to two short uppercase labels as micro-stickers. No other words, logos, watermarks, signatures, account names, labels, or gibberish.
@@ -36,4 +36,4 @@ The image should be cute because a real cat head is calmly occupying an ordinary
 
 ## Anti-style
 
-Avoid personality diagnosis, fantasy roles, heroic or villainous lore, unreadable object hybrids, material substitution for its own sake, several props competing in one sticker, all-nine face-window repetition, exaggerated reaction faces, altered facial proportions, visible necks, shoulders, chests, torsos, bellies, arms, legs, connected humanoid paws, full-body scenes, painterly art, cinematic lighting, glossy 3D, toy plastic, vector illustration, anime, chibi, plush redesign, watercolor, deep shadows, double outlines, packaging, photographed paper, hands holding the sheet, hard grids, copied inventory, duplicate faces, extra cats, or companions.
+Avoid personality diagnosis, fantasy roles, heroic or villainous lore, unreadable object hybrids, material substitution for its own sake, several props competing in one sticker, all-nine face-window repetition, exaggerated reaction faces, altered facial proportions, visible necks, shoulders, chests, torsos, bellies, arms, legs, connected humanoid paws, full-body scenes, painterly art, cinematic lighting, glossy 3D, toy plastic, vector illustration, anime, chibi, plush redesign, watercolor, deep shadows, double outlines, packaging, photographed paper, hands holding the sheet, hard grids, full-bleed scenery, gradient or textured backgrounds, copied inventory, duplicate faces, extra cats, or companions.

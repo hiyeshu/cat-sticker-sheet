@@ -2,9 +2,9 @@
 name: cat-sticker-sheet
 description: >-
   Turn one supplied cat photo or clear cat illustration into a finished 3:5
-  retro-pop photographic collage sticker sheet with nine face-led cat stickers
-  using familiar human props through one simple displacement, plus six
-  micro-stickers and a few graphic face-in-cover portrait accents. Use for 猫头贴纸,
+  retro-pop photographic collage sticker sheet with nine head-dominant, face-led
+  cat stickers using familiar human props through one simple displacement, plus
+  six micro-stickers and 2–3 graphic face-in-cover portrait accents. Use for 猫头贴纸,
   猫咪表情贴纸, pet sticker sheets, or lightly absurd anthropomorphic cat sticker
   generation. Preserve visible breed/type and identity
   anchors; keep human actions optional, and increase visual interest without
@@ -34,7 +34,7 @@ Turn one real cat into a retro-pop photographic sticker family. The cat stays re
 - Keep the object recognizable, normally constructed, and materially believable. For a face-in-cover accent, it may be enlarged, wrapped, or reshaped into an oversized shell while remaining identifiable at a glance. Do not add an unexpected material, second prop, fantasy role, or secondary gag unless the user explicitly asks.
 - Let most props be worn, held, or operated. Use **2–3 face-in-cover portraits** as visual accents: center the photographic cat face in one clean opening of an exaggerated shell that hides or replaces the body. Do not turn all nine pieces into the same face-window construction.
 - Treat telephone calls, a black plastic bag used as a hood, a baseball cap, a bath towel, or drinking coffee as calibration examples, never a mandatory inventory.
-- Use deliberate low-fi photomontage, high-saturation late-1990s/early-2000s poster energy, a background treatment chosen for this sheet, and one pure-white die-cut contour around every piece. Make the face-in-cover accents obvious, graphic, and close to surreal portraiture without changing the sheet into a fantasy world.
+- Use deliberate low-fi photomontage, high-saturation late-1990s/early-2000s poster energy, one flat sky-blue background near `#279DDA`, and one pure-white die-cut contour around every piece. Make the face-in-cover accents obvious, graphic, and close to surreal portraiture without changing the sheet into a fantasy world. Honor an explicit user color exactly; allow no scenery, gradient, vignette, glow, grain, or lighting falloff.
 - Permit zero to two short labels. Quote approved text exactly and allow no other words, logos, watermarks, signatures, account names, or gibberish.
 - Use a callable native image-generation tool whenever one is available. Use GD CLI only when the runtime exposes no native image-generation tool at all; a failed, slow, rate-limited, or unsatisfactory native call does not count as tool absence.
 
@@ -63,7 +63,7 @@ Resolve bundled paths relative to this `SKILL.md`.
 ## Generate
 
 1. **Inspect the source.** Record one subject count and four to eight robust identity anchors. Treat unreadable or hidden traits as unknown.
-2. **Write the final prompt.** State the identity anchors, head-first body rule, background direction, palette, 3:5 format, 2/4/3 scale rhythm, nine distinct object-interaction-displacement-micro-expression concepts, each concept's `body treatment: fully hidden behind the prop / clean jawline crop`, optional human actions where useful, 2–3 graphic face-in-cover accents, six cat-free micro-stickers, single white contour, and text boundary. Keep it backend-neutral and placeholder-free; do not create a separate plan artifact.
+2. **Write the final prompt.** State the identity anchors, head-first body rule, default flat sky-blue background near `#279DDA` or the user's exact color, palette, 3:5 format, 2/4/3 scale rhythm, nine distinct object-interaction-displacement-micro-expression concepts, each concept's `body treatment: fully hidden behind the prop / clean jawline crop`, optional human actions where useful, 2–3 graphic face-in-cover accents, six cat-free micro-stickers, single white contour, and text boundary. Explicitly forbid scenery, gradients, vignettes, glow, grain, and lighting falloff. Keep it backend-neutral and placeholder-free; do not create a separate plan artifact.
 3. **Choose the renderer.** Apply the native-first rule above; use `references/gd-cli.md` only for fallback.
 4. **Generate from the real source.** Pass only user-provided or task-required images, with the subject first. On the native route, use `referenced_image_paths` for local inputs or the smallest sufficient `num_last_images_to_include` for conversation-only inputs; never use both mechanisms. On the GD CLI fallback route, follow `references/gd-cli.md`. Never pass the bundled anchor to any renderer.
 5. **Check delivery, not taste.** Apply only the three catastrophic checks in `references/quality-gate.md`. Do not enumerate stickers, score prompt adherence, grade style details, compare candidate aesthetics, or regenerate automatically. Renderer variation is acceptable.
